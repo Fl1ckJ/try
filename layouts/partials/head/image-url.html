@@ -1,0 +1,54 @@
+{{- $page := . -}}
+{{- $image := "" -}}
+
+{{- with $page.Params.images -}}
+  {{- if gt (len .) 0 -}}
+    {{- $image = index . 0 -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if not $image -}}
+  {{- with $page.Params.image -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $image -}}
+  {{- with $page.Params.page.image -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $image -}}
+  {{- with $page.Params.hero.image -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $image -}}
+  {{- with $page.Params.hero.background -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $image -}}
+  {{- with $page.Params.solution.hero.image -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $image -}}
+  {{- with $page.Site.Params.defaultSocialImage -}}
+    {{- $image = . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $resolved := $image -}}
+{{- if and $page $image -}}
+  {{- with $page.Resources.GetMatch $image -}}
+    {{- $resolved = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $resolved -}}
+  {{- if or (hasPrefix $resolved "http://") (hasPrefix $resolved "https://") -}}
+    {{- $resolved -}}
+  {{- else -}}
+    {{- strings.TrimPrefix "/" $resolved | absURL -}}
+  {{- end -}}
+{{- end -}}

@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  .contact-section-heading {
+    color: #0288d1 !important;
+  }
+}
+
+@source "../";
+@source "../../../layouts";
+@source "../../../content";

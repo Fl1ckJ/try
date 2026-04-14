@@ -1,0 +1,27 @@
+{{ $demo := .demo }}
+{{ $isHome := eq .mode "home" }}
+
+{{ if $demo }}
+<section id="book-demo" class="{{ if $isHome }}bg-white py-[6em] max-[576px]:py-[4em]{{ else }}bg-white pt-[160px] pb-20 max-[576px]:pb-16{{ end }}">
+  <div class="mx-auto max-w-[1272px] px-5 lg:px-0">
+    <div class="mb-8 w-full lg:mb-10 lg:w-3/4">
+      {{ if $isHome }}
+      <h2 class="text-[2.7rem] leading-[1.05] font-normal tracking-[-0.03em] text-[#333] sm:text-[3.2rem]">{{ $demo.heading }}</h2>
+      {{ else }}
+      <h1 class="text-[2.7rem] leading-[1.05] font-normal tracking-[-0.03em] text-[#333] sm:text-[3.2rem]">{{ $demo.heading }}</h1>
+      {{ end }}
+      <p class="mt-2 text-[2rem] leading-[1.1] font-light text-[#0288d1] sm:mt-3 sm:text-[2.4rem]">{{ $demo.subtitle }}</p>
+    </div>
+
+    <div class="rounded-[1rem] bg-[linear-gradient(128deg,#eff9ff_35%,#d2dee6_95%)] p-4 sm:p-6">
+      <div class="demo-calendly" data-calendly-demo-root>
+        <div class="demo-calendly__loader-outer" data-calendly-loader>
+          <img src="{{ $demo.loader_image }}" alt="{{ $demo.loader_alt }}" width="70" height="70" class="h-[70px] w-[70px] shrink-0">
+          <p class="demo-calendly__loader" data-calendly-loader-text>{{ $demo.loader_text }}</p>
+        </div>
+        <div class="h-full w-full" data-calendly-demo data-calendly-url="{{ $demo.calendly_url }}"></div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

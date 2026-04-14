@@ -1,0 +1,18 @@
+{{ $section := .Params.guide }}
+<section class="bg-white">
+  <div class="mx-auto max-w-[1272px] px-5 py-20 md:py-24">
+    <div class="mx-auto max-w-[860px] text-center">
+      <img src="{{ $section.icon | relURL }}" alt="" class="how-it-works-reveal mx-auto mb-8 h-[120px] w-[120px] object-contain md:h-[160px] md:w-[160px]" data-how-it-works-reveal>
+      <h3 class="mb-4 text-[1.3rem] font-medium leading-[1.45] text-[#333132] md:text-[1.5rem]">{{ $section.eyebrow }}</h3>
+      <h2 class="mb-8 text-[2.2rem] font-bold leading-[1.05] text-[#333132] md:text-[3rem]">{{ $section.title }}</h2>
+      {{ with $section.primary_cta }}
+        <button type="button" data-open-blockchain-guide="{{ .modal_target }}" class="inline-flex rounded-md bg-[#0278b8] px-6 py-3 text-[1rem] font-medium text-white transition-colors hover:bg-[#01466c]">{{ .label }}</button>
+      {{ end }}
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        {{ range $section.secondary_ctas }}
+          <a href="{{ .url }}" class="inline-flex rounded-md border border-[#0278b8] px-5 py-3 text-[1rem] font-medium text-[#0278b8] transition-colors hover:bg-[#0278b8] hover:text-white">{{ .label }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>

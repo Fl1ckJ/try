@@ -1,0 +1,14 @@
+{{ define "main" }}
+
+  {{ partial "home/hero.html" . }}
+  {{ partial "home/problems.html" . }}
+  {{ partial "home/benefits.html" . }}
+  {{ partial "home/steps.html" . }}
+  {{ partial "home/alt.html" . }}
+  {{ partial "home/experiences.html" . }}
+  {{ partial "home/value.html" . }}
+  {{ partial "home/featured.html" . }}
+  {{ with site.GetPage "section" "demo" }}
+    {{ partial "demo/section.html" (dict "demo" .Params.demo "mode" "home") }}
+  {{ end }}
+{{ end }} 

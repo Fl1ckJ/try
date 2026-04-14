@@ -1,0 +1,23 @@
+{{ with .Params.hero }}
+  <div
+    class="contentBlock fullHeight imageTextCols background_imagewithfader large"
+    style="background-image:url('{{ strings.TrimPrefix "/" .background | absURL }}')"
+  >
+    <div class="fader"></div>
+    <div class="content container page">
+      <div>
+        <div class="imageTextColRow row alt">
+          <div class="image col col-12 col-lg-6 sidebar">
+            <img src="{{ .image }}" alt="{{ .image_alt }}">
+          </div>
+          <div class="text col col-12 col-lg-6">
+            <h1>{{ .heading }}</h1>
+            {{ range .paragraphs }}
+              <p>{{ . }}</p>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

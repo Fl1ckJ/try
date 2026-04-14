@@ -1,0 +1,22 @@
+<section class="bg-white">
+  <div class="mx-auto max-w-[1272px] px-5 pb-20 pt-[160px] md:pb-24 md:pt-[176px]">
+    <div class="grid gap-y-6">
+      <div class="lg:grid lg:max-w-[1180px] lg:grid-cols-12 lg:gap-8">
+        <div class="lg:col-span-8">
+          <h1 class="text-[3rem] font-bold leading-none text-[#333132] md:text-[3.5rem]">{{ .Title }}</h1>
+          {{ with site.Data.privacy.last_updated }}
+            <p class="mt-3 text-[0.95rem] font-medium text-[#7b8790]">Updated {{ . }}</p>
+          {{ end }}
+        </div>
+        <div class="hidden lg:col-span-4 lg:block"></div>
+      </div>
+
+      <div class="lg:grid lg:max-w-[1180px] lg:grid-cols-12 lg:gap-8">
+        <div class="min-w-0 text-[#333132] lg:col-span-8 [&_.overflow-x-auto]:my-8 [&_.overflow-x-auto]:w-full [&_.overflow-x-auto]:overflow-x-auto [&_p]:mb-6 [&_p]:text-[1.08rem] [&_p]:leading-[1.78] [&_h2]:mt-10 [&_h2]:mb-3 [&_h2]:text-[1.9rem] [&_h2]:font-medium [&_h2]:leading-tight [&_h2]:text-[#333132] [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-[1.4rem] [&_h3]:font-medium [&_h3]:text-[#333132] [&_a]:text-[#283339] [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-[#01466c] [&_table.privacy-cookie-table]:w-full [&_table.privacy-cookie-table]:min-w-[640px] [&_table.privacy-cookie-table]:border-collapse [&_table.privacy-cookie-table]:bg-white [&_table.privacy-cookie-table]:shadow-[3px_5px_5px_rgba(0,0,0,0.25)] [&_table.privacy-cookie-table_thead_tr]:bg-[linear-gradient(128deg,#2287c8_35%,#1f72ae_95%)] [&_table.privacy-cookie-table_thead_tr]:text-white [&_table.privacy-cookie-table_tbody_tr]:bg-white [&_table.privacy-cookie-table_th]:border [&_table.privacy-cookie-table_th]:border-[#d2dee6] [&_table.privacy-cookie-table_th]:px-[0.65em] [&_table.privacy-cookie-table_th]:py-[0.65em] [&_table.privacy-cookie-table_th]:text-left [&_table.privacy-cookie-table_th]:text-[1.1em] [&_table.privacy-cookie-table_th]:font-semibold [&_table.privacy-cookie-table_th]:leading-[1.75em] [&_table.privacy-cookie-table_th]:text-white [&_table.privacy-cookie-table_td]:border [&_table.privacy-cookie-table_td]:border-[#d2dee6] [&_table.privacy-cookie-table_td]:bg-white [&_table.privacy-cookie-table_td]:px-[0.65em] [&_table.privacy-cookie-table_td]:py-[0.65em] [&_table.privacy-cookie-table_td]:align-top [&_table.privacy-cookie-table_td]:text-[1.1em] [&_table.privacy-cookie-table_td]:leading-[1.75em]">
+          {{ .Content }}
+        </div>
+        <div class="hidden lg:col-span-4 lg:block"></div>
+      </div>
+    </div>
+  </div>
+</section>

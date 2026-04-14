@@ -1,0 +1,46 @@
+{{- $description := partial "head/description.html" . -}}
+{{- $imageURL := partial "head/image-url.html" . -}}
+{{- $siteDescription := .Site.Params.description -}}
+{{- $logoURL := "" -}}
+{{- with .Site.Params.logo -}}
+  {{- $logoURL = strings.TrimPrefix "/" . | absURL -}}
+{{- end -}}
+
+{{- $organization := dict
+  "@type" "Organization"
+  "name" .Site.Title
+  "url" .Site.Home.Permalink
+  "description" $siteDescription
+-}}
+{{- with $logoURL -}}
+  {{- $organization = merge $organization (dict "logo" (dict "@type" "ImageObject" "url" .)) -}}
+{{- end -}}
+
+{{- $website := dict
+  "@type" "WebSite"
+  "name" .Site.Title
+  "url" .Site.Home.Permalink
+  "description" $siteDescription
+-}}
+
+{{- $graph := slice $organization $website -}}
+
+{{- if and .IsPage (eq .Section "blog") -}}
+  {{- $authorName := default .Site.Title .Params.author -}}
+  {{- $article := dict
+    "@type" "Article"
+    "headline" .Title
+    "description" $description
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+    "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+    "author" (dict "@type" "Person" "name" $authorName)
+    "publisher" $organization
+  -}}
+  {{- with $imageURL -}}
+    {{- $article = merge $article (dict "image" .) -}}
+  {{- end -}}
+  {{- $graph = $graph | append $article -}}
+{{- end -}}
+
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>

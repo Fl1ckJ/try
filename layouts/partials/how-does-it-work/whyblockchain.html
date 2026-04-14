@@ -1,0 +1,19 @@
+{{ $section := .Params.why_blockchain }}
+<section class="bg-[linear-gradient(128deg,#2287c8_35%,#1f72ae_95%)]">
+  <div class="mx-auto max-w-[1272px] px-5 py-20 md:py-24">
+    <div class="mx-auto max-w-[860px] text-center">
+      <h2 class="mb-8 text-[2.2rem] font-bold leading-[1.05] text-white md:text-[3rem]">{{ $section.title }}</h2>
+      <img src="{{ $section.icon | relURL }}" alt="" class="how-it-works-reveal mx-auto mb-8 h-[120px] w-[120px] object-contain md:h-[160px] md:w-[160px]" data-how-it-works-reveal>
+      <h3 class="mb-8 text-[1.4rem] font-medium leading-[1.35] text-white md:text-[1.65rem]">{{ $section.prompt_start }}</h3>
+      <div class="space-y-8">
+        {{ range $section.points }}
+          <div class="mx-auto max-w-[720px] text-white/95">
+            <img src="{{ .icon | relURL }}" alt="" class="how-it-works-reveal mx-auto mb-4 h-10 w-10 object-contain" data-how-it-works-reveal>
+            <p class="text-[1.05rem] leading-[1.8]">{{ .text | safeHTML }}</p>
+          </div>
+        {{ end }}
+      </div>
+      <h3 class="mt-10 text-[1.28rem] font-medium leading-[1.45] text-white md:text-[1.5rem]">{{ $section.prompt_end }}</h3>
+    </div>
+  </div>
+</section>

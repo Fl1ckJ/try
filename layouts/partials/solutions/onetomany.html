@@ -1,0 +1,55 @@
+{{ with .Params.onetomany }}
+  <div class="contentBlock variableHeight imageTextCols rotaryCarousel background_white">
+    <div class="fader"></div>
+    <div class="content container page">
+      <div>
+        <h2>{{ .heading }}</h2>
+        <div class="imageTextColRow row">
+          <div class="image col col-12 col-lg-7 sidebar">
+            <div class="rotaryCarouselContainer" data-solutions-rotary>
+              <div class="rotaryCarousel rotator step1" data-rotator>
+                {{ range .items }}
+                  <div class="rotatorLogo rotatorLogo{{ .id }}" data-index="{{ .id }}" title="{{ .heading }}">
+                    <div>
+                      <img src="{{ .logo_dark }}" alt="{{ .heading }}">
+                    </div>
+                  </div>
+                {{ end }}
+              </div>
+              <div class="rotaryCarouselCentralLogo">
+                <img src="{{ .center_image }}" alt="SteelTrace central logo">
+              </div>
+            </div>
+          </div>
+          <div class="text col col-12 col-lg-5">
+            <div class="rotaryCarouselTextContainer" data-rotary-text>
+              {{ range .items }}
+                <div class="rotatorText{{ if eq .id 1 }} is-active{{ end }}" data-index="{{ .id }}">
+                  <div>
+                    <div class="rotatorTextLogo rotatorTextLogo{{ .id }}">
+                      <a href="{{ .url }}">
+                        <img src="{{ .logo_dark }}" alt="{{ .heading }}">
+                      </a>
+                    </div>
+                    <h2><a href="{{ .url }}">{{ .heading }}</a></h2>
+                    <h3>{{ .subheading }}</h3>
+                    <p>{{ .body }}</p>
+                    <div class="buttons">
+                      <a href="{{ .url }}" class="button">Learn More...</a>
+                      <div class="pauseButtonContainer">
+                        <span data-rotary-status>Playing</span>
+                        <a href="#" title="Start / Stop rotation" class="button pauseButton" data-rotary-toggle>
+                          <span class="icon" data-rotary-icon>||</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

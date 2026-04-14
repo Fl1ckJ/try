@@ -1,0 +1,40 @@
+{{ with .Params.experiences }}
+<section class="bg-white px-8 py-[6em] max-[576px]:py-[4em]">
+  <div class="mx-auto max-w-[1272px] text-center">
+    <h2 class="mb-20 text-[1.65em] font-light text-[#5e5e5e] max-[576px]:mb-12 max-[576px]:text-[1.45em]">{{ .heading }} <strong>{{ .heading_highlight }}</strong></h2>
+
+    <div class="grid gap-x-[62px] gap-y-[30px] md:grid-cols-3">
+      {{ range .stats }}
+      <div class="mx-auto w-[250px] max-w-full rounded-[1em]">
+        <h2 class="m-0 text-[3.7em] font-bold text-[#333]">{{ .number }}</h2>
+        <p class="m-0 text-[1.4em] font-medium text-[#5e5e5e]">{{ .label }}</p>
+      </div>
+      {{ end }}
+    </div>
+
+    <div class="mt-20 grid gap-6 md:grid-cols-2 max-[576px]:mt-12">
+      {{ range .quotes }}
+      <div class="rounded-lg bg-[linear-gradient(128deg,#eef9ff_35%,#d6e9f5_95%)] p-6 text-center shadow-[1px_3px_5px_rgba(0,0,0,0.25)]">
+        <p class="m-0 text-base leading-[1.7] text-[#5e5e5e]">{{ .text }} <strong>{{ .highlight }}</strong>{{ if .suffix }} {{ .suffix }}{{ end }}</p>
+      </div>
+      {{ end }}
+    </div>
+
+    <div class="mx-auto mt-20 flex max-w-[800px] flex-wrap items-center justify-center gap-x-[62px] gap-y-[30px] max-[576px]:mt-12">
+      {{ range .logos }}
+      {{ if .url }}
+      <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" title="{{ .alt }}" class="block h-[60px]" style="filter: brightness(0) invert(52%);">
+        <img src="{{ .image }}" alt="{{ .alt }}" class="reveal-image block h-[60px] w-auto object-contain">
+      </a>
+      {{ else }}
+      <img src="{{ .image }}" alt="{{ .alt }}" class="reveal-image block h-[60px] w-auto object-contain" style="filter: brightness(0) invert(52%);">
+      {{ end }}
+      {{ end }}
+    </div>
+
+    <div class="mt-[6em] flex justify-center max-[576px]:mt-[4em]">
+      <a href="{{ .ctaLink }}" class="site-cta inline-flex items-center gap-2 rounded-md bg-[linear-gradient(128deg,#f54e7c_0%,#d04168_50%)] px-7 py-4 text-xl leading-6 font-bold whitespace-nowrap text-white shadow-[1px_3px_5px_rgba(0,0,0,0.25)] transition-colors duration-200 hover:bg-[#c9284c]">{{ .ctaText }}</a>
+    </div>
+  </div>
+</section>
+{{ end }}

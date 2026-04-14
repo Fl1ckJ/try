@@ -1,0 +1,19 @@
+{{ with .Params.featured }}
+<section class="bg-white px-8 py-[6em] max-[576px]:py-[4em]">
+  <div class="mx-auto max-w-[1272px] text-center">
+    <h2 class="mb-20 text-[1.65em] font-light text-[#5e5e5e] max-[576px]:mb-12 max-[576px]:text-[1.45em]"><strong>{{ .heading_highlight }}</strong> {{ .heading }}</h2>
+    <div class="mx-auto grid max-w-[1160px] grid-cols-2 items-center justify-items-center gap-x-8 gap-y-[30px] min-[768px]:grid-cols-3 min-[1100px]:grid-cols-4 max-[576px]:max-w-[80%]">
+      {{ range $index, $logo := .logos }}
+      <div class="grid min-h-[85px] w-full place-items-center{{ if eq $logo.desktop_span 2 }} min-[1100px]:col-span-2{{ end }}{{ if eq $logo.desktop_start 4 }} min-[1100px]:col-start-4{{ end }}">
+        <a href="{{ $logo.url }}" target="_blank" rel="noopener noreferrer" class="grid w-full place-items-center">
+          <img src="{{ $logo.image }}" alt="{{ $logo.alt }}" class="reveal-image block h-[85px] w-auto max-w-[95%] object-contain {{ if eq $index 5 }}min-[1100px]:max-w-[440px]{{ end }}">
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    <div class="mt-[6em] flex justify-center max-[576px]:mt-[4em]">
+      <a href="{{ .ctaLink }}" class="site-cta inline-flex items-center gap-2 rounded-md bg-[linear-gradient(128deg,#f54e7c_0%,#d04168_50%)] px-7 py-4 text-xl leading-6 font-bold whitespace-nowrap text-white shadow-[1px_3px_5px_rgba(0,0,0,0.25)] transition-colors duration-200 hover:bg-[#c9284c]">{{ .ctaText }}</a>
+    </div>
+  </div>
+</section>
+{{ end }}

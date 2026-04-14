@@ -1,0 +1,119 @@
+{{ define "main" }}
+  {{ $imageURL := partial "blog/image-url.html" (dict "page" . "image" .Params.image) }}
+  {{ $readMore := .Params.read_more }}
+  {{ $readMoreItems := slice }}
+  {{ if $readMore }}
+    {{ $readMoreItems = default (slice) $readMore.items }}
+  {{ end }}
+  {{ $hasReadMore := or (gt (len $readMoreItems) 0) (and $readMore $readMore.link) }}
+
+  <section class="bg-white">
+    <div>
+      <div class="relative min-h-[390px] overflow-hidden bg-[#1f4f86]">
+        {{ with $imageURL }}
+          <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ . }}');"></div>
+          <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,69,124,0.82)_0%,rgba(31,88,153,0.74)_42%,rgba(31,88,153,0.72)_58%,rgba(18,57,106,0.82)_100%)]"></div>
+          <div class="absolute inset-0 bg-[rgba(19,61,108,0.22)]"></div>
+        {{ end }}
+
+        <div class="relative mx-auto max-w-[1272px] px-5 pb-12 pt-[132px] md:pb-14 md:pt-[150px]">
+          <div class="max-w-[44rem]">
+            <a href="{{ "/blog/" | relURL }}" class="inline-flex rounded-md border border-white/70 bg-transparent px-4 py-3 text-[1rem] font-medium text-white no-underline transition-colors hover:bg-white hover:text-[#1d4d87]">Back to blog</a>
+
+            <h1 class="mt-12 max-w-[13ch] text-[2.75rem] font-bold leading-[1.08] text-white md:text-[3.3rem]">{{ .Title }}</h1>
+
+            {{ with .Params.subtitle }}
+              <p class="mt-3 max-w-[22ch] text-[1.55rem] font-light leading-[1.18] text-white md:text-[1.95rem]">{{ . }}</p>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-auto max-w-[1272px] px-5 pb-20 pt-10">
+        <div class="{{ if $hasReadMore }}grid gap-12 lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)]{{ else }}mx-auto max-w-[80ch]{{ end }}">
+          <div>
+            {{ if or .Date .Params.author }}
+              <p class="mb-6 text-[1rem] leading-[1.7] text-[#4b5563]">
+                Published on
+                {{ with .Date }}
+                  <span class="font-medium text-[#0288d1]">{{ .Format "Monday January 2, 2006" }}</span>
+                {{ end }}
+                {{ with $.Params.author }}
+                  by <span class="font-medium text-[#0288d1]">{{ . }}</span>
+                {{ end }}
+              </p>
+            {{ end }}
+
+            {{ if and (not .Params.subtitle) .Params.excerpt }}
+              <p class="mb-8 text-[1.2rem] leading-[1.75] text-[#333132]">{{ .Params.excerpt }}</p>
+            {{ end }}
+
+            <div class="space-y-6 text-[1.08rem] leading-[1.85] text-[#333132] [&_a]:text-[#0288d1] [&_a]:underline [&_a]:underline-offset-4 [&_h2]:mt-10 [&_h2]:text-[1.65rem] [&_h2]:font-medium [&_h2]:leading-[1.25] [&_h2]:text-[#333132] [&_h3]:mt-10 [&_h3]:text-[1.65rem] [&_h3]:font-medium [&_h3]:leading-[1.25] [&_h3]:text-[#333132] [&_img]:max-w-full [&_img]:rounded-lg [&_img]:h-auto [&_li]:mb-3 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:m-0 [&_ul]:list-disc [&_ul]:list-outside [&_ul]:pl-6">
+              {{ .Content }}
+            </div>
+          </div>
+
+          {{ with $readMore }}
+            <aside class="lg:pt-1">
+              <h2 class="pb-3 text-[1.6rem] font-medium text-[#333132]">{{ default "Read more about" .heading }}</h2>
+
+              {{ range $readMoreItems }}
+                {{ $item := . }}
+                {{ $title := $item.title }}
+                {{ $url := $item.url }}
+                {{ $summary := $item.summary }}
+                {{ $label := default "Read more" $item.label }}
+                {{ $imageURL := $item.image }}
+                {{ $linkedPage := "" }}
+                {{ with $item.page }}
+                  {{ with site.GetPage . }}
+                    {{ $linkedPage = . }}
+                    {{ $title = default .Title $item.title }}
+                    {{ $url = .RelPermalink }}
+                    {{ $summary = default .Params.excerpt $item.summary }}
+                  {{ end }}
+                {{ else }}
+                  {{ if and $url (hasPrefix $url "/") }}
+                    {{ with site.GetPage $url }}
+                      {{ $linkedPage = . }}
+                      {{ $title = default .Title $item.title }}
+                      {{ $url = .RelPermalink }}
+                      {{ $summary = default .Params.excerpt $item.summary }}
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+
+                {{ with $linkedPage }}
+                  {{ if eq .Section "blog" }}
+                    {{ $imageURL = partial "blog/image-url.html" (dict "page" . "image" (default .Params.image .Params.preview_image)) }}
+                  {{ end }}
+                {{ end }}
+
+                {{ if and $title $url }}
+                  <a href="{{ $url }}" class="mb-6 block rounded-lg border border-[#ddd] bg-white text-left no-underline transition-colors hover:bg-[#f8f8f8]">
+                    {{ with $imageURL }}
+                      <div class="mb-3 aspect-square overflow-hidden rounded-t-lg bg-[#eef3f7]">
+                        <img src="{{ . }}" alt="{{ $title }}" class="h-full w-full object-cover">
+                      </div>
+                    {{ end }}
+                    <div class="px-5 pb-6 pt-3">
+                      <h3 class="m-0 pb-2 text-[1.3rem] font-medium leading-[1.25] text-[#333132]">{{ $title }}</h3>
+                      {{ with $summary }}
+                        <p class="py-2 text-[1rem] leading-[1.7] text-[#333132]">{{ . }}</p>
+                      {{ end }}
+                      <span class="mt-3 inline-flex rounded-md bg-[#0278b8] px-4 py-3 text-[1.05rem] font-medium text-white transition-colors hover:bg-[#015a8a]">{{ $label }}</span>
+                    </div>
+                  </a>
+                {{ end }}
+              {{ end }}
+
+              {{ with .link }}
+                <a href="{{ .url }}" class="inline-flex rounded-md border border-[#0278b8] px-4 py-3 text-[1.05rem] font-medium text-[#0278b8] transition-colors hover:bg-[#0278b8] hover:text-white">{{ default "View more" .label }}</a>
+              {{ end }}
+            </aside>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

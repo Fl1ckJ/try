@@ -1,0 +1,43 @@
+.how-it-works-reveal {
+  opacity: 0;
+  transform: scale(0.75);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+
+  &.is-shown {
+    opacity: 1;
+    transform: scale(1);
+    animation: howItWorksImageZoomIn 1s;
+  }
+}
+
+.how-it-works-number {
+  opacity: 0;
+  transform: scale(0.25);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+
+  &.is-shown {
+    opacity: 1;
+    transform: scale(1);
+    animation: howItWorksBigNumberZoom 1.25s;
+  }
+}
+
+@keyframes howItWorksImageZoomIn {
+  0% {
+    transform: scale(0.75);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes howItWorksBigNumberZoom {
+  0% {
+    transform: scale(0.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

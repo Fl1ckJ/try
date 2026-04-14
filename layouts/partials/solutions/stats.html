@@ -1,0 +1,24 @@
+{{ with .Params.stats }}
+  <div class="contentBlock variableHeight bigNumbers background_blue">
+    <div class="fader"></div>
+    <div class="content container page">
+      <div>
+        <div class="row">
+          <div class="text col col-12">
+            <div class="bigNumbersContainer threeNumber">
+              {{ range .items }}
+                <div class="bigNumberOuter">
+                  <div class="bigNumber bigNumber_medium">
+                    <img src="{{ .icon }}" alt="{{ .label }}">
+                    <h3>{{ .value }}</h3>
+                    <p>{{ .label }}</p>
+                  </div>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

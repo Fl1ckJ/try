@@ -1,0 +1,101 @@
+{{ define "main" }}
+  <section class="bg-white">
+    <div class="mx-auto max-w-[1272px] px-5 pb-20 pt-[160px]">
+      {{ with .Params.page }}
+        <div class="grid gap-6">
+          <div class="max-w-[72rem] pb-5">
+            <h1 class="pb-[0.4em] text-[3rem] font-bold leading-none text-[#333132] md:text-[3.5rem]">{{ $.Title }}</h1>
+            <h2 class="text-[2.4rem] font-light text-[#333132]">{{ .subtitle }}</h2>
+          </div>
+
+          <div class="pb-3 pt-2 md:pt-4">
+            <img src="{{ .image }}" alt="{{ .image_alt }}" class="h-auto w-full">
+          </div>
+
+          <div class="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
+            <div class="text-[#333132]">
+              <p class="mb-8 text-[1.3rem] leading-[1.75em] font-medium">
+                <strong>{{ .intro }}</strong>
+              </p>
+
+              {{ range .sections }}
+                <h2 class="pb-2 text-[1.75rem] font-medium text-[#333132]">{{ .title }}</h2>
+
+                {{ with .quote }}
+                  <figure class="my-8 text-center">
+                    <blockquote class="mx-auto max-w-3xl">
+                      <p class="text-[1.55rem] leading-[1.6] text-[#333132]">{{ . }}</p>
+                    </blockquote>
+                  </figure>
+                {{ end }}
+
+                {{ range .paragraphs }}
+                  <p class="mb-6 text-[1.1rem] leading-[1.75em] text-[#333132]">{{ . }}</p>
+                {{ end }}
+              {{ end }}
+
+              {{ with $.Params.founding }}
+                <h2 class="pb-2 text-[1.75rem] font-medium text-[#333132]">{{ .title }}</h2>
+                {{ range .paragraphs }}
+                  <p class="mb-6 text-[1.1rem] leading-[1.75em] text-[#333132]">{{ . | safeHTML }}</p>
+                {{ end }}
+                <p class="mb-6 text-[1.1rem] leading-[1.75em] text-[#333132]">&ldquo;{{ .quote }}&rdquo;, {{ .attribution }}</p>
+                {{ range .after_quote }}
+                  <p class="mb-6 text-[1.1rem] leading-[1.75em] text-[#333132]">{{ . | safeHTML }}</p>
+                {{ end }}
+              {{ end }}
+
+              {{ with $.Params.region }}
+                <h2 class="pb-2 text-[1.75rem] font-medium text-[#333132]">{{ .title }}</h2>
+                {{ range .paragraphs }}
+                  <p class="mb-6 text-[1.1rem] leading-[1.75em] text-[#333132]">{{ . | safeHTML }}</p>
+                {{ end }}
+              {{ end }}
+            </div>
+
+            {{ with $.Params.articles }}
+              <aside class="lg:pl-6">
+                <h2 class="pb-3 text-[1.6rem] font-medium text-[#333132]">{{ .title }}</h2>
+
+                {{ range .items }}
+                  {{ $item := . }}
+                  {{ with $item.page }}
+                    {{ with site.GetPage . }}
+                      {{ partial "blog/card.html" (dict "page" . "variant" "sidebar") }}
+                    {{ else }}
+                      {{ partial "blog/card.html" (dict "variant" "sidebar" "title" $item.title "summary" $item.summary "image" $item.image "url" $item.url) }}
+                    {{ end }}
+                  {{ else }}
+                    {{ partial "blog/card.html" (dict "variant" "sidebar" "title" $item.title "summary" $item.summary "image" $item.image "url" $item.url) }}
+                  {{ end }}
+                {{ end }}
+
+                {{ with .link }}
+                  <a href="{{ .url }}" class="inline-flex rounded-md border border-[#0278b8] px-4 py-3 text-[1.05rem] font-medium text-[#0278b8] transition-colors hover:bg-[#0278b8] hover:text-white">{{ .label }}</a>
+                {{ end }}
+              </aside>
+            {{ end }}
+          </div>
+
+          {{ with $.Params.promos }}
+            <div class="grid gap-[25px] pt-6 md:grid-cols-2 xl:grid-cols-3">
+              {{ range .items }}
+                <div class="relative">
+                  <a
+                    href="{{ .url }}"
+                    class="{{ if eq .theme "purple" }}bg-[#2a274f] hover:bg-[#4e4993]{{ else }}bg-[#0288d1] hover:bg-[#01466c]{{ end }} flex aspect-square min-h-[280px] items-center justify-center text-center no-underline transition-colors xl:min-h-0"
+                  >
+                    <div class="px-[20.5%]">
+                      <h2 class="mb-[15px] text-[2rem] font-extralight leading-[1.15] text-white xl:text-[2.1rem]">{{ .eyebrow }}</h2>
+                      <p class="text-[1.2rem] font-medium text-white xl:text-[1.4rem]">{{ .title }}</p>
+                    </div>
+                  </a>
+                </div>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

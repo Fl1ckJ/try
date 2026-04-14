@@ -1,0 +1,287 @@
+{{ define "main" }}
+  {{ $solution := .Params.solution }}
+  {{ $mode := default "full" $solution.mode }}
+  {{ $solutionsIndex := .Site.GetPage "/solutions" }}
+  {{ $productIcons := slice }}
+  {{ $trustedLogos := site.Data.solution_detail.trusted_logos }}
+  {{ with $solutionsIndex }}
+    {{ with .Params.steeltrace_icons.items }}
+      {{ $productIcons = . }}
+    {{ end }}
+  {{ end }}
+
+  <div class="solutions-live solution-detail-live">
+    {{ with $solution.hero }}
+      <div class="contentBlock fullHeight imageTextCols background_imagewithfader large" style="background-image:url('{{ "dist/images/solutions-live/inspectors-background.jpg" | absURL }}')">
+        <div class="fader"></div>
+        <div class="content container page">
+          <div>
+            <div class="imageTextColRow row alt">
+              <div class="image col px-5 lg:pr-0 lg:pl-4 col-lg-6 sidebar">
+                <img src="{{ .image }}" alt="{{ .image_alt }}" class="solution-reveal">
+              </div>
+              <div class="text col px-5 md:pr-4 md:pl-0 lg:pr-5 col-lg-6">
+                <h1>{{ .heading }}</h1>
+                {{ with .subheading }}
+                  <h3>{{ . }}</h3>
+                {{ end }}
+                {{ range .paragraphs }}
+                  <p>{{ . | safeHTML }}</p>
+                {{ end }}
+                {{ with .primary_cta }}
+                  <div class="buttons">
+                    <a href="{{ .url }}" class="button">{{ .label }}</a>
+                  </div>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+
+    <div class="contentBlock logo-carousel">
+      <p>Trusted By</p>
+
+      <div class="logoScrollerWrapper" style="height: 60px">
+        <div class="logoScroller" style="height: 60px">
+          {{ range seq 1 2 }}
+            <div class="images"{{ if eq . 2 }} aria-hidden="true"{{ end }}>
+              {{ range $trustedLogos }}
+                <a href="{{ .url }}" target="_blank" rel="noreferrer" title="{{ .name }}" style="height: 60px;">
+                  <img src="{{ .image }}" alt="{{ .name }}" title="{{ .name }}" style="width: {{ .width }}px; height: 60px;">
+                </a>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+    {{ if eq $mode "full" }}
+      {{ with $solution.overview }}
+        <div class="contentBlock variableHeight multiCol multiCol_4 background_white">
+          <div class="fader"></div>
+          <div class="content container page">
+            <div>
+              <h2>{{ .heading }}</h2>
+              <div class="multiColRow row">
+                {{ range .items }}
+                  <div class="text textAlone col px-5 col-md-6 col-lg-3 mx-auto">
+                    <p><img src="{{ .icon }}" alt="" class="featureIcon"></p>
+                    <h3>{{ .title }}</h3>
+                    {{ range .body }}
+                      <p>{{ . | safeHTML }}</p>
+                    {{ end }}
+                  </div>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {{ end }}
+
+      {{ with $solution.features }}
+        <div class="contentBlock fullHeight imageTextCols background_blue large">
+          <div class="fader"></div>
+          <div class="content container page">
+            <div>
+              <h2>{{ default "Key Features" .eyebrow }}</h2>
+              {{ range $index, $item := .items }}
+                <div class="imageTextColRow row{{ if eq (mod $index 2) 0 }} alt{{ end }}">
+                  <div class="image col px-5{{ if eq (mod $index 2) 0 }} lg:pr-0 lg:pl-4{{ else }} lg:pr-4 lg:pl-0{{ end }} col-lg-6 sidebar">
+                    <img src="{{ $item.image }}" alt="{{ $item.image_alt }}" class="solution-reveal">
+                  </div>
+                  <div class="text col px-5{{ if eq (mod $index 2) 0 }} md:pr-4 md:pl-0 lg:pr-5{{ else }} md:px-0 lg:pl-5{{ end }} col-lg-6">
+                    <h2>{{ $item.title }}</h2>
+                    {{ range $item.paragraphs }}
+                      <p>{{ . | safeHTML }}</p>
+                    {{ end }}
+                  </div>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      {{ end }}
+
+      {{ partial "solutions/detail_cta.html" (dict "cta" $solution.cta) }}
+
+      {{ with $solution.testimonials }}
+        <div class="contentBlock variableHeight thinPadding testimonials background_blue" data-solution-testimonials>
+          <div class="content">
+            <div>
+              <h2>{{ .heading }}</h2>
+              <div class="testimonialsWrapper" data-solution-testimonial-wrapper>
+                {{ range $index, $item := .items }}
+                  {{ $logoSrc := $item.logo }}
+                  {{ if eq $logoSrc "/dist/images/mega.png" }}
+                    {{ $logoSrc = "/dist/images/solutions-trusted/logo-white-mega.png" }}
+                  {{ end }}
+                  {{ if eq $logoSrc "/dist/images/total.png" }}
+                    {{ $logoSrc = "/dist/images/solutions-trusted/logo-white-total.png" }}
+                  {{ end }}
+                  <div data-index="{{ $index }}" class="testimonial{{ if eq $index 0 }} is-active{{ end }}" data-solution-testimonial>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col px-5 md:px-0 col-lg-8 mx-auto">
+                          <blockquote>
+                            <p>"{{ $item.quote }}"</p>
+                          </blockquote>
+                          {{ with $logoSrc }}
+                            <div class="logo">
+                              <img src="{{ . }}" alt="{{ $item.logo_alt }}">
+                            </div>
+                          {{ end }}
+                          <div class="person">
+                            <p>{{ $item.source }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {{ end }}
+                {{ if gt (len .items) 1 }}
+                  <button type="button" class="back" data-solution-testimonial-prev aria-label="Previous testimonial">&nbsp;</button>
+                  <button type="button" class="forward" data-solution-testimonial-next aria-label="Next testimonial">&nbsp;</button>
+                {{ end }}
+              </div>
+              {{ if gt (len .items) 1 }}
+                <div class="testimonialsNav" data-solution-testimonial-nav-list>
+                  {{ range $index, $_ := .items }}
+                    <button type="button" class="{{ if eq $index 0 }}active{{ end }}" data-solution-testimonial-nav data-target-index="{{ $index }}" aria-label="Go to testimonial {{ add $index 1 }}"></button>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      {{ end }}
+
+      {{ with $solution.resources }}
+        <div class="contentBlock fullHeight blog blog-overview px-4 background_darkblue">
+          <div class="fader"></div>
+          <div class="content container page px-4">
+            <div class="row gap-y-10">
+              <h2>{{ .heading }}</h2>
+              {{ range .items }}
+                {{ $resource := site.GetPage .page }}
+                {{ $url := .url }}
+                {{ $title := .title }}
+                {{ $summary := .summary }}
+                {{ $imageURL := .image }}
+                {{ with $resource }}
+                  {{ $url = .RelPermalink }}
+                  {{ $title = .Title }}
+                  {{ $summary = .Params.excerpt }}
+                  {{ with .Params.image }}
+                    {{ $imageURL = partial "blog/image-url.html" (dict "page" $resource "image" .) }}
+                  {{ else }}
+                    {{ with .Resources.GetMatch "hero*" }}
+                      {{ $imageURL = .RelPermalink }}
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+                {{ if and $title $url }}
+                  <div class="col col-md-6 col-lg-4">
+                    <a class="steelTraceBlogOverviewColumn" href="{{ $url }}">
+                      {{ with $imageURL }}
+                        <div class="mb-3">
+                          <img src="{{ . }}" alt="{{ $title }}" class="img-fluid">
+                        </div>
+                      {{ end }}
+                      <h2>{{ $title }}</h2>
+                      {{ with $summary }}
+                        <p>{{ . }}</p>
+                      {{ end }}
+                      <div class="buttons">
+                        <span class="button">Read article</span>
+                      </div>
+                    </a>
+                  </div>
+                {{ end }}
+              {{ end }}
+              <div class="buttons w-full">
+                <a href="{{ with .more }}{{ .url }}{{ else }}/blog/{{ end }}" class="button">Read More...</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{ end }}
+
+      {{ partial "solutions/detail_cta.html" (dict "cta" $solution.cta) }}
+    {{ else }}
+      {{ with $solution.ecosystem }}
+        <div class="contentBlock variableHeight big-text background_blue">
+          <div class="fader"></div>
+          <div class="content">
+            <div>
+              <div class="container">
+                <div class="row">
+                  <div class="col px-5 md:px-0 col-lg-8 mx-auto">
+                    <h2>{{ .heading }}</h2>
+                    <div class="text">
+                      <p><img src="{{ .desktop_image }}" alt="{{ .desktop_image_alt }}" class="desktop solution-reveal"></p>
+                      <p><img src="{{ .mobile_image }}" alt="{{ .mobile_image_alt }}" class="mobile solution-reveal"></p>
+                      {{ range .paragraphs }}
+                        <p>{{ . | safeHTML }}</p>
+                      {{ end }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{ end }}
+
+      {{ with $solution.availability }}
+        <div class="contentBlock variableHeight big-text background_white">
+          <div class="fader"></div>
+          <div class="content">
+            <div>
+              <div class="container">
+                <div class="row">
+                  <div class="col px-5 md:px-0 col-lg-8 mx-auto">
+                    <div class="text">
+                      <p><img src="{{ "/dist/images/solutions-detail/teams-logo-300px.png" | relURL }}" alt="{{ .heading }}" class="solution-reveal solution-teams-badge"></p>
+                      {{ with .note }}
+                        <h3>{{ . }}</h3>
+                      {{ end }}
+                      {{ with .prompt }}
+                        <h3>{{ . }}</h3>
+                      {{ end }}
+                      <h2>{{ .heading }}</h2>
+                    </div>
+                    <div class="buttons">
+                      <a href="{{ .url }}" class="button">{{ .label }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{ end }}
+    {{ end }}
+
+    {{ if gt (len $productIcons) 0 }}
+      <div class="contentBlock variableHeight thinPadding productLogos multiCol multiCol_6 background_darkblue">
+        <div class="fader"></div>
+        <div class="content container page">
+          <div>
+            <div class="multiColRow row">
+              {{ range $productIcons }}
+                <div class="text textAlone col col-6 px-2 col-md-4 col-lg-2 mx-auto">
+                  <a href="{{ .url }}"><img src="{{ .image }}" alt="{{ .alt }}"></a>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+
+  <div data-vue="SolutionDetailPageMount"></div>
+{{ end }}

@@ -1,0 +1,51 @@
+{{ $variant := default "grid" .variant }}
+{{ $post := .page }}
+{{ $title := .title }}
+{{ $summary := .summary }}
+{{ $image := .image }}
+{{ $url := .url }}
+{{ $imageURL := $image }}
+
+{{ with $post }}
+  {{ $title = .Title }}
+  {{ $summary = .Params.excerpt }}
+  {{ $image = default .Params.image .Params.preview_image }}
+  {{ $url = .RelPermalink }}
+  {{ $imageURL = partial "blog/image-url.html" (dict "page" . "image" $image) }}
+{{ end }}
+
+{{ if and $title $url }}
+  {{ if eq $variant "sidebar" }}
+    <a href="{{ $url }}" class="mb-8 block rounded-lg border border-[#ddd] bg-white text-left no-underline transition-colors hover:bg-[#f8f8f8]">
+      {{ with $imageURL }}
+        <div class="mb-3 aspect-square overflow-hidden rounded-t-lg bg-[#eef3f7]">
+          <img src="{{ . }}" alt="{{ $title }}" class="h-full w-full object-cover">
+        </div>
+      {{ end }}
+      <div class="px-4 pb-6">
+        <h3 class="m-0 pb-2 text-[1.3rem] font-medium leading-[1.25] text-[#333132]">{{ $title }}</h3>
+        {{ with $summary }}
+          <p class="py-2 text-[1rem] leading-[1.7] text-[#333132]">{{ . }}</p>
+        {{ end }}
+        <span class="mt-3 inline-flex rounded-md bg-[#0278b8] px-4 py-3 text-[1.05rem] font-medium text-white transition-colors hover:bg-[#015a8a]">Read article</span>
+      </div>
+    </a>
+  {{ else }}
+    <div class="h-full">
+      <a href="{{ $url }}" class="group relative block h-full rounded-lg border border-[#ddd] bg-transparent px-5 pb-[calc(1.5rem+60px)] no-underline transition-colors hover:bg-f8f8f8">
+        {{ with $imageURL }}
+          <div class="-mx-5 mb-3 aspect-square overflow-hidden rounded-t-lg bg-[#eef3f7]">
+            <img class="h-full w-full object-cover" src="{{ . }}" alt="{{ $title }}">
+          </div>
+        {{ end }}
+        <h2 class="pb-1 text-left text-[1.65rem] font-medium text-[#333132]">{{ $title }}</h2>
+        {{ with $summary }}
+          <p class="py-2 text-[1rem] leading-[3.125ex] text-[#333132]">{{ . }}</p>
+        {{ end }}
+        <div class="absolute bottom-4 left-4">
+          <span class="inline-flex rounded-md bg-[#0288d1] px-4 py-3 text-[1.05rem] font-medium text-white transition-colors hover:bg-[#0278b8]">Read article</span>
+        </div>
+      </a>
+    </div>
+  {{ end }}
+{{ end }}

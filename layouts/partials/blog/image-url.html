@@ -1,0 +1,11 @@
+{{- $image := .image -}}
+{{- $page := .page -}}
+{{- $resolved := $image -}}
+
+{{- if and $page $image -}}
+  {{- with $page.Resources.GetMatch $image -}}
+    {{- $resolved = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $resolved -}}

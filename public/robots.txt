@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://openmaterialexchange.github.io/main-site/sitemap.xml

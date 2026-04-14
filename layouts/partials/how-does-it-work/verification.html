@@ -1,0 +1,8 @@
+{{ $section := .Params.verification }}
+<section class="bg-[linear-gradient(128deg,#1b4e83_35%,#153b63_95%)]">
+  <div class="mx-auto max-w-[1272px] px-5 py-20 md:py-24">
+    <h2 class="mb-10 text-center text-[2.2rem] font-bold leading-[1.05] text-white md:text-[3rem]">{{ $section.title }}</h2>
+    <img src="{{ $section.desktop_image | relURL }}" alt="{{ $section.image_alt }}" class="how-it-works-reveal mx-auto hidden w-full max-w-[1100px] md:block" data-how-it-works-reveal>
+    <img src="{{ $section.mobile_image | relURL }}" alt="{{ $section.image_alt }}" class="how-it-works-reveal mx-auto w-full max-w-[430px] md:hidden" data-how-it-works-reveal>
+  </div>
+</section>

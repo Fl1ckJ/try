@@ -1,0 +1,36 @@
+{{ with .Params.weekly_demo }}
+  <div class="mb-[3rem] grid gap-y-0 pb-[3rem] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+    <div class="min-w-0 px-12 text-[#333132] lg:pl-2 lg:pr-12">
+      <p class="mb-4 text-[1rem] font-light leading-[1.5] text-[#333132]">{{ .intro }}</p>
+
+      {{ range .schedule_groups }}
+        <section class="last:mb-0">
+          <h2 class="mb-2 text-[1rem] font-bold leading-[1.5] text-[#212529]">{{ .title }}</h2>
+
+          <div class="mb-4 overflow-x-auto">
+            <table class="min-w-full border-collapse text-left text-[1rem] leading-[1.5] text-[#212529]">
+              <thead class="bg-[#f8f9fa]">
+                <tr>
+                  <th class="border-b border-[#dee2e6] px-2 py-2 font-semibold text-[#212529]">City</th>
+                  <th class="border-b border-[#dee2e6] px-2 py-2 font-semibold text-[#212529]">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{ range .rows }}
+                  <tr>
+                    <td class="border-b border-[#dee2e6] px-2 py-2">{{ .city }}</td>
+                    <td class="border-b border-[#dee2e6] px-2 py-2">{{ .time }}</td>
+                  </tr>
+                {{ end }}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      {{ end }}
+    </div>
+
+    <div class="min-w-0 px-12 lg:pl-12 lg:pr-4">
+      {{ partial "weekly/form.html" $ }}
+    </div>
+  </div>
+{{ end }}

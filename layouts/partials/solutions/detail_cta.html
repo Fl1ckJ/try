@@ -1,0 +1,28 @@
+{{ with .cta }}
+  <div class="contentBlock variableHeight thinPadding big-text signUpBanner background_white">
+    <div class="fader"></div>
+    <div class="content">
+      <div>
+        <div class="container">
+          <div class="row signUpBannerRow">
+            <div class="col px-5 md:px-0 col-lg-9 mx-auto">
+              <div class="text">
+                <h2>{{ .heading }}</h2>
+                {{ range .paragraphs }}
+                  <p>{{ . | safeHTML }}</p>
+                {{ end }}
+              </div>
+              <div class="buttons buttonsLeft">
+                <a href="{{ .url }}" class="button">{{ .label }}</a>
+              </div>
+            </div>
+
+            <div class="col px-5 md:px-0 col-lg-3 mx-auto signUpBannerImageContainer">
+              <a href="{{ .url }}"><img src="{{ "/dist/images/solutions-detail/teams-logo-300px.png" | relURL }}" alt="{{ .label }}" class="solution-reveal solution-teams-badge"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

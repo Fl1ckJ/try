@@ -1,0 +1,79 @@
+$site-cta-arrow: "../images/arrow-right-2024.svg";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  font-weight: 300;
+}
+
+strong {
+  font-weight: 700;
+}
+
+.site-cta {
+  position: relative;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    background-image: url($site-cta-arrow);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 0 center;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover::before,
+  &:active::before {
+    transform: translateX(2px);
+  }
+
+  &:hover,
+  &:active {
+    background-size: 400% 400%;
+    animation: ctaGradientShift 2s ease 1;
+  }
+}
+
+.reveal-image {
+  opacity: 0;
+  transform: scale(0.75);
+  transition: opacity 0.75s;
+
+  &.is-shown {
+    opacity: 1;
+    transform: scale(1);
+    animation: imageZoomIn 1s;
+  }
+}
+
+@keyframes ctaGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes imageZoomIn {
+  0% {
+    transform: scale(0.75);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

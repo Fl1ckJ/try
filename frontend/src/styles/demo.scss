@@ -1,0 +1,62 @@
+.demo-calendly {
+  overflow: hidden;
+  height: 80px;
+  transition: height 0.5s;
+  border-radius: 0.5em;
+  position: relative;
+}
+
+.demo-calendly.shown {
+  height: 900px;
+}
+
+@media screen and (max-width: 1200px) {
+  .demo-calendly.shown {
+    height: 1100px;
+  }
+}
+
+.demo-calendly__loader {
+  opacity: 1;
+  font-size: 1.5em;
+  animation: demoPulseFade 1s infinite;
+  margin: 0;
+  line-height: 1.1em;
+}
+
+@keyframes demoPulseFade {
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0.25;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.demo-calendly__loader-outer {
+  opacity: 1;
+  transition: opacity 0.5s;
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 1em;
+}
+
+.demo-calendly.shown .demo-calendly__loader-outer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.demo-calendly__loader-outer img {
+  display: inline-block;
+  margin-right: 1em;
+}

@@ -1,0 +1,6 @@
+{{ $link := .link }}
+{{ $class := default "text-[14.5px] font-medium text-[#5e5e5e] transition-colors hover:text-[#2287c8]" .class }}
+<a href="{{ $link.url }}"{{ with $link.target }} target="{{ . }}"{{ end }}{{ if eq $link.target "_blank" }} rel="noreferrer"{{ end }} class="group flex items-center gap-2 py-2 {{ $class }}">
+  <svg class="h-4 w-4 shrink-0 text-[#d2dee6] transition-all duration-150 group-hover:translate-x-[3px] group-hover:text-[#2287c8]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+  {{ $link.title }}
+</a>

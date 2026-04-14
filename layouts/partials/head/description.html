@@ -1,0 +1,21 @@
+{{- $description := "" -}}
+{{- with .Params.description -}}
+  {{- $description = . -}}
+{{- end -}}
+{{- if not $description -}}
+  {{- with .Params.excerpt -}}
+    {{- $description = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $description -}}
+  {{- with .Summary -}}
+    {{- $description = . -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $description -}}
+  {{- with .Site.Params.description -}}
+    {{- $description = . -}}
+  {{- end -}}
+{{- end -}}
+{{- $description = $description | plainify | htmlUnescape | replaceRE "\\s+" " " -}}
+{{- $description -}}

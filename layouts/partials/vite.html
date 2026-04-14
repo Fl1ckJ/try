@@ -1,0 +1,10 @@
+{{ $manifest := (readFile "static/dist/.vite/manifest.json" | transform.Unmarshal) }}
+{{ $main := index $manifest "src/main.ts" }}
+
+{{ with (index $main "css") }}
+  {{ range . }}
+    <link rel="stylesheet" href="{{ (printf "/dist/%s" .) | relURL }}">
+  {{ end }}
+{{ end }}
+
+<script type="module" src="{{ (printf "/dist/%s" (index $main "file")) | relURL }}"></script>

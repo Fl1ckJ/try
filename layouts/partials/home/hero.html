@@ -1,0 +1,32 @@
+{{ with .Params.hero }}
+<section class="relative mb-0 bg-cover bg-[position:70%_center] pt-[140px] text-white" style="background-image: url('{{ strings.TrimPrefix "/" .background | absURL }}');">
+  <div class="absolute inset-0 z-[1] bg-[rgba(0,0,30,0.3)]"></div>
+
+  <div class="relative z-[2] mx-auto max-w-[1272px] px-4 lg:px-0">
+    <div class="w-full py-16 lg:w-[50%] lg:py-[7em] lg:pb-[10em] xl:w-[45%] 2xl:w-[50%]">
+      <h1 class="text-center text-[3.2em] leading-[1.05] font-extrabold tracking-[-0.025em] sm:text-[3.5em] md:text-[4em] lg:text-[4.5em] lg:text-left">{{ .heading }}</h1>
+
+      <div class="flex flex-col items-center gap-4 pt-16 lg:flex-row lg:flex-wrap lg:items-start lg:justify-start lg:pt-8">
+      {{ range .buttons }}
+      <a href="{{ .url }}" class="{{ if eq .style "secondary" }}inline-flex w-full max-w-[280px] items-center justify-center rounded-md border border-white bg-transparent px-7 py-4 text-xl leading-6 font-bold whitespace-nowrap text-white transition-all duration-200 hover:bg-black sm:w-auto sm:max-w-none{{ else }}site-cta inline-flex w-full max-w-[280px] items-center justify-center gap-2 rounded-md bg-[linear-gradient(128deg,#f54e7c_0%,#d04168_50%)] px-7 py-4 text-xl leading-6 font-bold whitespace-nowrap text-white shadow-[1px_3px_5px_rgba(0,0,0,0.25)] transition-colors duration-200 hover:bg-[#c9284c] sm:w-auto sm:max-w-none{{ end }}">
+        {{ .label }}
+      </a>
+      {{ end }}
+    </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 pb-12 text-center text-[1rem] font-light sm:text-[1.2rem] lg:pb-[3em] lg:text-[1.75em] lg:leading-7">
+      {{ range $index, $tick := .ticks }}
+      <div class="{{ if eq $index 0 }}lg:text-left{{ else if eq $index 2 }}lg:text-right{{ else }}lg:text-center{{ end }}">
+        <div class="flex flex-col items-center justify-center gap-2 lg:flex-row lg:gap-[0.3em] {{ if eq $index 0 }}lg:justify-start{{ else if eq $index 2 }}lg:justify-end{{ else }}lg:justify-center{{ end }}">
+          <span class="relative block h-[1em] w-[1em] shrink-0 rounded-full bg-[#2287c8]" aria-hidden="true">
+            <span class="absolute left-[0.18em] top-[0.18em] block h-[0.65em] w-[0.65em] bg-contain bg-no-repeat" style="background-image:url('{{ "dist/images/check.svg" | absURL }}')"></span>
+          </span>
+          <span><strong>{{ $tick.label }}</strong> {{ $tick.suffix }}</span>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

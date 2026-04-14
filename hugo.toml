@@ -1,0 +1,46 @@
+baseURL = "https://openmaterialexchange.github.io/main-site/"
+languageCode = "en-us"
+title = "SteelTrace"
+enableRobotsTXT = true
+canonifyURLs = true
+
+[params]
+description = "SteelTrace is a digital platform for steel supply-chain quality data, traceability, and compliance, helping teams collect, verify, and use quality data in one place."
+defaultSocialImage = "/dist/images/quality-manager-in-oil-and-gas-industry-v2.jpg"
+logo = "/dist/images/logo_blue.svg"
+locale = "en_US"
+applicationName = "steeltrace.co"
+themeColor = "#0288D1"
+faviconVersion = "20260407"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[menu]
+
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    name = "Solutions"
+    url = "/solutions/"
+    weight = 2
+
+  [[menu.main]]
+    name = "How does it work"
+    url = "/how-does-it-work/"
+    weight = 3
+
+  [[menu.main]]
+    name = "About"
+    url = "/about-us/"
+    weight = 4
+
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 5

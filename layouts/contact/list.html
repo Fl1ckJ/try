@@ -1,0 +1,63 @@
+{{ define "main" }}
+  {{ $contact := .Params.contact }}
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-[1272px] px-5 pb-20 pt-[160px] md:pb-24 md:pt-[176px]">
+      <div class="mx-auto max-w-[1180px]">
+        <div class="grid gap-y-12 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_8.333333%]">
+          <div class="min-w-0 text-[#333132]">
+            <h1 class="mb-8 text-[2.8rem] font-bold leading-none text-[#333132] md:text-[3.25rem]">{{ .Title }}</h1>
+
+            {{ with $contact.visiting_address }}
+              <section class="mb-10">
+                <h2 class="contact-section-heading mb-3 text-[1.75rem] font-medium leading-tight">{{ .title }}</h2>
+                <p class="text-[1rem] leading-[1.68] text-[#333132]">
+                  {{ range $index, $line := .lines }}{{ if gt $index 0 }}<br>{{ end }}{{ $line }}{{ end }}
+                </p>
+              </section>
+            {{ end }}
+
+            {{ with $contact.postal_address }}
+              <section class="mb-8">
+                <h2 class="contact-section-heading mb-3 text-[1.75rem] font-medium leading-tight">{{ .title }}</h2>
+                <p class="text-[1rem] leading-[1.68] text-[#333132]">
+                  {{ range $index, $line := .lines }}{{ if gt $index 0 }}<br>{{ end }}{{ $line }}{{ end }}
+                </p>
+              </section>
+            {{ end }}
+
+            <p class="mb-6 text-[1rem] leading-[1.68] text-[#333132]">
+              {{ with $contact.email }}
+                <a href="{{ .href | safeURL }}" class="text-[#283339] underline underline-offset-4 transition-colors hover:text-[#01466c]">{{ .label }}</a>
+              {{ end }}
+              {{ with $contact.phone }}
+                <br>
+                <a href="{{ .href | safeURL }}" class="text-[#333132] transition-colors hover:text-[#01466c]">{{ .label }}</a>
+              {{ end }}
+            </p>
+
+            {{ with $contact.chamber_of_commerce }}
+              <p class="mb-8 text-[1rem] leading-[1.68] text-[#333132]">Chamber of Commerce (K.V.K.) {{ . }}</p>
+            {{ end }}
+
+            {{ with $contact.holidays }}
+              <section>
+                <h2 class="contact-section-heading mb-2 text-[1.3rem] font-medium">{{ .title }}</h2>
+                <p class="mb-4 text-[1rem] leading-[1.68] text-[#333132]">{{ .intro }}</p>
+                <ul class="space-y-2 pl-5 text-[1rem] leading-[1.68] text-[#333132] marker:text-[#0278b8]">
+                  {{ range .items }}
+                    <li>{{ . }}</li>
+                  {{ end }}
+                </ul>
+              </section>
+            {{ end }}
+          </div>
+
+          <div class="min-w-0 xl:col-start-2 xl:pt-1">
+            {{ partial "contact/form_embed.html" . }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

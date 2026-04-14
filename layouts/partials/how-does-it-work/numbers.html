@@ -1,0 +1,16 @@
+{{ $section := .Params.numbers }}
+<section class="bg-white">
+  <div class="mx-auto max-w-[1272px] px-5 py-20 md:py-24">
+    <h2 class="mb-12 text-center text-[2.2rem] font-bold leading-[1.05] text-[#333132] md:text-[3rem]">{{ $section.title }}</h2>
+    <div class="mx-auto flex max-w-[1040px] flex-wrap justify-center gap-8" data-how-it-works-number-group>
+      {{ range $section.items }}
+        <article class="how-it-works-number relative h-[220px] w-[220px] rounded-full bg-[linear-gradient(128deg,#1b4e83_35%,#153b63_95%)] px-6 pt-5 text-center text-white shadow-[0_18px_45px_rgba(0,0,0,0.18)]" data-how-it-works-number>
+          <img src="{{ .image | relURL }}" alt="" class="mx-auto h-11 w-11 object-contain">
+          <h3 class="mt-5 text-[3.1rem] font-bold leading-none">{{ .value }}</h3>
+          <p class="mx-auto mt-4 max-w-[70%] text-[1rem] leading-[1.28] text-white/95">{{ .label | safeHTML }}</p>
+        </article>
+      {{ end }}
+    </div>
+    <p class="mt-12 text-center text-[1.45rem] font-medium text-[#333132]">{{ $section.footer }}</p>
+  </div>
+</section>

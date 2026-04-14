@@ -1,0 +1,10 @@
+{{ $hero := .Params.hero }}
+<section class="relative overflow-hidden bg-[#2287c8] bg-cover bg-center bg-no-repeat" style="background-image:url('{{ strings.TrimPrefix "/" $hero.background_image | absURL }}')">
+  <div class="absolute inset-0 bg-[linear-gradient(128deg,rgba(34,135,200,0.83)_35%,rgba(31,114,174,0.83)_95%)]"></div>
+  <div class="relative mx-auto flex max-w-[1272px] flex-col items-center px-5 pb-[82px] pt-[150px] text-center md:pb-[108px] md:pt-[172px]">
+    <h1 class="text-[2.5rem] font-bold leading-none text-white md:text-[3.6rem]">{{ $hero.title }}</h1>
+    <div class="mt-8 w-full max-w-[1080px] md:mt-10">
+      <div data-how-it-works-hero class="mx-auto aspect-[16/9] w-full max-w-[1020px]"></div>
+    </div>
+  </div>
+</section>

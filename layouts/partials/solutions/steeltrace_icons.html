@@ -1,0 +1,18 @@
+{{ with .Params.steeltrace_icons }}
+  <div class="contentBlock variableHeight thinPadding productLogos multiCol multiCol_6 background_darkblue">
+    <div class="fader"></div>
+    <div class="content container page">
+      <div>
+        <div class="multiColRow row">
+          {{ range .items }}
+            <div class="text textAlone col col-6 col-md-4 col-lg-2">
+              <a href="{{ .url }}">
+                <img src="{{ .image }}" alt="{{ .alt }}">
+              </a>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

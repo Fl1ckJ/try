@@ -1,0 +1,65 @@
+{{ $lightHeader := or (eq .Section "about") (eq .Section "privacy") (eq .Type "privacy") (eq .RelPermalink "/privacy/") (eq .Section "disclaimer") (eq .Type "disclaimer") (eq .RelPermalink "/disclaimer/") (eq .Section "contact") (eq .Type "contact") (eq .RelPermalink "/contact/") (eq .Section "demo") (eq .Type "demo") (eq .RelPermalink "/demo/") (eq .Section "weekly") (eq .Type "weekly") (eq .RelPermalink "/weekly/") (and (eq .Section "blog") (not .IsPage)) }}
+{{ $nav := site.Data.navigation.header }}
+{{ $demoURL := partial "demo/url.html" . }}
+<header class="absolute top-10 z-[200] w-full bg-transparent">
+  <div class="relative z-[2] mx-auto flex h-20 max-w-[1272px] items-center justify-between px-4 lg:px-0">
+    <a href="{{ "/" | relURL }}" class="flex shrink-0 items-center">
+      <img src="{{ if $lightHeader }}{{ "/dist/images/logo_blue.svg" | relURL }}{{ else }}{{ "/dist/images/logo_white.svg" | relURL }}{{ end }}" alt="Logo" class="block h-auto w-[250px] max-w-full lg:w-[300px]">
+    </a>
+
+    <div class="flex items-center gap-3.5">
+      <a href="{{ $demoURL }}" class="site-cta hidden items-center gap-2 rounded-md bg-[linear-gradient(128deg,#f54e7c_0%,#d04168_50%)] px-7 py-3 text-[1.1em] font-bold leading-6 whitespace-nowrap text-white shadow-[1px_3px_5px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#c9284c] md:inline-flex">
+        Get a Demo
+      </a>
+      <button class="hamburger flex h-[57px] w-10 shrink-0 flex-col justify-center gap-[5px] bg-transparent p-[6px] {{ if $lightHeader }}text-[#888]{{ else }}text-white{{ end }} transition-colors duration-250 hover:text-[#f54e7c]" id="hamburger" aria-label="Toggle menu" aria-expanded="false" data-close-class="{{ if $lightHeader }}text-[#888]{{ else }}text-white{{ end }}">
+        <span class="block h-[3px] w-full bg-current"></span>
+        <span class="block h-[3px] w-full bg-current"></span>
+        <span class="block h-[3px] w-full bg-current"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mega-menu pointer-events-none invisible absolute left-1/2 top-[65px] z-[190] w-[calc(100%-32px)] max-w-[1272px] -translate-x-1/2 translate-y-5 overflow-hidden rounded-[0.75em] bg-white opacity-0 shadow-[0_3px_8px_rgba(0,0,0,0.25)] transition-all ease-[cubic-bezier(0.16,1,0.3,1)] md:w-full" id="mega-menu">
+    <div class="flex flex-col md:grid md:grid-cols-[1fr_1fr_280px]">
+      <div class="border-b border-[#e8edf2] px-6 py-8 md:px-12 md:py-12">
+        <h3 class="mb-3.5 text-[1.5rem] font-semibold text-[#2287c8]">Solutions</h3>
+        <ul class="grid gap-x-4 min-[560px]:grid-cols-2">
+          {{ range $nav.solution_links }}
+            <li>{{ partial "nav/mega_link.html" (dict "link" .) }}</li>
+          {{ end }}
+        </ul>
+        <ul class="mt-2.5 border-t border-[#e2e8f0] pt-1">
+          <li>{{ partial "nav/mega_link.html" (dict "link" (dict "title" "All Solutions" "url" "/solutions/") "class" "text-[13.5px] font-medium text-[#718096] transition-colors hover:text-[#2287c8]") }}</li>
+        </ul>
+      </div>
+
+      <div class="border-b border-[#e8edf2] px-6 py-8 md:px-12 md:py-12">
+        <h3 class="mb-3.5 text-[1.5rem] font-semibold text-[#2287c8]">Free Resources</h3>
+        <ul>
+          {{ range $nav.resource_links }}
+            <li>{{ partial "nav/mega_link.html" (dict "link" .) }}</li>
+          {{ end }}
+        </ul>
+        <ul class="mt-2.5 border-t border-[#e2e8f0] pt-1">
+          <li>{{ partial "nav/mega_link.html" (dict "link" (dict "title" "Read our blog" "url" "/blog/") "class" "text-[13.5px] font-medium text-[#718096] transition-colors hover:text-[#2287c8]") }}</li>
+        </ul>
+      </div>
+
+      <div class="bg-[linear-gradient(128deg,#eff9ff_35%,#d2dee6_95%)] px-6 py-8 md:px-12 md:py-12">
+        <h3 class="mb-3.5 text-[1.5rem] font-semibold text-[#2287c8]">SteelTrace</h3>
+        <ul>
+          {{ range $nav.steeltrace_links }}
+            <li>{{ partial "nav/mega_link.html" (dict "link" .) }}</li>
+          {{ end }}
+        </ul>
+        <ul class="mt-2.5 border-t border-[#e2e8f0] pt-1">
+          {{ range $nav.steeltrace_secondary_links }}
+            <li>{{ partial "nav/mega_link.html" (dict "link" . "class" "text-[13.5px] font-medium text-[#718096] transition-colors hover:text-[#2287c8]") }}</li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="overlay pointer-events-none invisible fixed inset-0 top-[72px] z-[150] opacity-0 md:hidden" id="overlay"></div>

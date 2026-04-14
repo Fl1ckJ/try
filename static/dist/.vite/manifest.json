@@ -1,0 +1,26 @@
+{
+  "_lottie-Bvwbhvaz.js": {
+    "file": "assets/lottie-Bvwbhvaz.js",
+    "name": "lottie",
+    "isDynamicEntry": true
+  },
+  "src/assets/how-it-works-hero-lottie.json": {
+    "file": "assets/how-it-works-hero-lottie-SDno8VLu.js",
+    "name": "how-it-works-hero-lottie",
+    "src": "src/assets/how-it-works-hero-lottie.json",
+    "isDynamicEntry": true
+  },
+  "src/main.ts": {
+    "file": "assets/main-BrbSS2_k.js",
+    "name": "main",
+    "src": "src/main.ts",
+    "isEntry": true,
+    "dynamicImports": [
+      "_lottie-Bvwbhvaz.js",
+      "src/assets/how-it-works-hero-lottie.json"
+    ],
+    "css": [
+      "assets/main-DfVlM--y.css"
+    ]
+  }
+}

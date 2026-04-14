@@ -1,0 +1,20 @@
+product_brochure:
+  title: "Get our Product Brochure"
+  action: "https://mautic.steeltrace.io/form/submit?formId=10"
+  form_id: 10
+  form_name: "downloadtheproductbrochure"
+  sitekey: "54dbef36-8433-4901-9338-6a57133127c4"
+  first_name_label: "First Name"
+  last_name_label: "Last Name"
+  email_label: "Email"
+  consent_label: 'I consent to SteelTrace processing my data as per the <a href="/privacy/" target="_blank" rel="noreferrer">privacy statement</a>'
+  submit_label: "Email Me the Brochure!"
+newsletter:
+  title: "Receive the latest blogs in your email inbox"
+  action: "https://mautic.steeltrace.io/form/submit?formId=13"
+  form_id: 13
+  form_name: "newsletter"
+  sitekey: "54dbef36-8433-4901-9338-6a57133127c4"
+  email_label: "Email"
+  consent_label: 'I consent to SteelTrace processing my data as per the <a href="/privacy/" target="_blank" rel="noreferrer">privacy statement</a>'
+  submit_label: "Sign Up to the Newsletter!"

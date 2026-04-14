@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ partial "head/seo.html" . }}
+</head>
+{{- $siteBasePath := "/" -}}
+{{- with urls.Parse .Site.BaseURL -}}
+  {{- $siteBasePath = default "/" .Path -}}
+{{- end -}}
+{{- if not (hasSuffix $siteBasePath "/") -}}
+  {{- $siteBasePath = printf "%s/" $siteBasePath -}}
+{{- end -}}
+<body data-site-base="{{ $siteBasePath }}" class="flex min-h-screen flex-col bg-white font-sans text-[#5e5e5e] antialiased">
+  {{ partial "header.html" . }}
+  <main class="flex-1">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  {{ partial "forms/newsletter_modal.html" . }}
+  {{ partial "forms/product_brochure_modal.html" . }}
+  <div data-vue="CookieConsent"></div>
+  {{ partial "vite.html" . }}
+</body>
+</html>

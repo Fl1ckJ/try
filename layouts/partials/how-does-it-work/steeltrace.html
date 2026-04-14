@@ -1,0 +1,29 @@
+{{ $section := .Params.platform }}
+<section class="bg-[linear-gradient(128deg,#2287c8_35%,#1f72ae_95%)]">
+  <div class="mx-auto max-w-[1272px] px-5 py-20 md:py-24">
+    <h2 class="mb-14 text-center text-[2.2rem] font-bold leading-[1.05] text-white md:text-[3rem]">{{ $section.title }}</h2>
+    <div class="space-y-16">
+      {{ range $index, $item := $section.items }}
+        {{ $reverse := modBool $index 2 }}
+        <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <div class="{{ if $reverse }}order-2 lg:order-2{{ else }}order-2 lg:order-1{{ end }}">
+            <img src="{{ $item.image | relURL }}" alt="{{ $item.title }}" class="how-it-works-reveal mx-auto w-full max-w-[520px]" data-how-it-works-reveal>
+          </div>
+          <div class="text-white {{ if $reverse }}order-1 lg:order-1{{ else }}order-1 lg:order-2{{ end }}">
+            <h3 class="mb-5 text-[1.55rem] font-medium leading-[1.2] md:text-[1.8rem]">{{ $item.title }}</h3>
+            <div class="space-y-5 text-[1.02rem] leading-[1.78] text-white/95">
+              {{ range $item.paragraphs }}
+                <p>{{ . | safeHTML }}</p>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+    {{ with $section.cta }}
+      <div class="mt-12 text-center">
+        <a href="{{ .url }}" class="inline-flex rounded-md border border-white bg-white px-5 py-3 text-[1rem] font-medium text-[#1d4d87] transition-colors hover:bg-transparent hover:text-white">{{ .label }}</a>
+      </div>
+    {{ end }}
+  </div>
+</section>

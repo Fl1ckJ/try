@@ -1,0 +1,22 @@
+{{- $key := .Get "key" -}}
+{{- $rows := index .Page.Params.cookie_tables $key -}}
+{{- with $rows }}
+<div class="overflow-x-auto">
+  <table class="privacy-cookie-table">
+    <thead>
+      <tr>
+        <th>Cookie Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{- range . }}
+        <tr>
+          <td>{{ .name }}</td>
+          <td>{{ .description }}</td>
+        </tr>
+      {{- end }}
+    </tbody>
+  </table>
+</div>
+{{- end }}

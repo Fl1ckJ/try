@@ -1,0 +1,68 @@
+{{ with .Params.roles }}
+  <section class="bg-white">
+    <div class="mx-auto max-w-[1272px] px-5 pb-24 pt-12 md:pt-14">
+      <div class="mx-auto max-w-[980px]">
+        <h2 class="text-[2rem] font-medium leading-tight text-[#333132]">{{ .title }}</h2>
+
+        {{ range .items }}
+          <div class="pt-6">
+            <div class="mx-auto max-w-[980px] text-center text-[#333132]">
+              <h2 class="text-[1.95rem] font-medium leading-[1.2]">{{ .title }}</h2>
+              <div class="mt-4 space-y-4 text-[1.08rem] leading-[1.85]">
+                {{ range .intro }}
+                  <p>{{ . }}</p>
+                {{ end }}
+                <p class="font-semibold">{{ .emphasis }}</p>
+              </div>
+            </div>
+
+            {{ range $index, $section := .sections }}
+              {{ $isAlt := eq (mod $index 2) 1 }}
+              <div class="mx-auto grid max-w-[980px] items-center gap-y-6 py-8 lg:gap-x-10 {{ if $isAlt }}lg:grid-cols-[minmax(0,1fr)_200px]{{ else }}lg:grid-cols-[200px_minmax(0,1fr)]{{ end }}">
+                <div class="flex justify-center {{ if $isAlt }}lg:order-2{{ end }}">
+                  <img src="{{ $section.image }}" alt="{{ $section.image_alt }}" class="reveal-image h-auto w-full max-w-[200px]">
+                </div>
+
+                <div class="text-[#333132] {{ if $isAlt }}lg:order-1{{ end }}">
+                  <h3 class="pb-4 text-[1.75rem] font-medium leading-tight">{{ $section.title }}</h3>
+
+                  {{ with $section.paragraphs }}
+                    <div class="space-y-4 text-[1.08rem] leading-[1.85]">
+                      {{ range . }}
+                        <p>{{ . }}</p>
+                      {{ end }}
+                    </div>
+                  {{ end }}
+
+                  {{ with $section.bullets }}
+                    <ul class="list-disc space-y-3 pl-5 text-[1.08rem] leading-[1.85] marker:text-[#2287c8]">
+                      {{ range . }}
+                        <li><strong>{{ .label }}</strong> {{ .text }}</li>
+                      {{ end }}
+                    </ul>
+                  {{ end }}
+                </div>
+              </div>
+            {{ end }}
+
+            <div class="mx-auto max-w-[980px] pt-2 text-center text-[#333132]">
+              <h3 class="pb-4 text-[1.75rem] font-medium leading-tight">{{ .closing.title }}</h3>
+              <div class="space-y-4 text-[1.08rem] leading-[1.85]">
+                {{ range .closing.paragraphs }}
+                  <p>{{ . }}</p>
+                {{ end }}
+                <p class="font-semibold">{{ .closing.emphasis }}</p>
+              </div>
+
+              {{ with .cta }}
+                <div class="pt-8">
+                  <a href="{{ .url }}" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center rounded-md bg-[linear-gradient(128deg,#2287c8_35%,#1f72ae_95%)] px-6 py-3 text-[1rem] font-medium text-white shadow-[1px_3px_5px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#1d6da5]">{{ .label }}</a>
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}

@@ -1,0 +1,24 @@
+{{ with .Params.alt }}
+<section class="relative bg-cover bg-center bg-no-repeat px-8 py-[6em] text-center max-[576px]:py-[4em]" style="background-image: url('{{ strings.TrimPrefix "/" .background | absURL }}')">
+  <div class="absolute inset-0 bg-[rgba(0,0,30,0.3)]"></div>
+
+  <div class="relative mx-auto max-w-[1272px]">
+    <h2 class="mb-20 text-center text-[1.65em] font-light text-white max-[576px]:mb-12 max-[576px]:text-[1.45em]">{{ .heading }} <strong>{{ .heading_highlight }}</strong> {{ .heading_ending }}</h2>
+
+    <ul class="mx-auto mb-0 max-w-[500px] list-none text-left">
+      {{ range .items }}
+      <li class="relative pb-6 pl-[1.55em] text-[1.25em] font-light leading-[1.75] text-white last:pb-0">
+        <span class="absolute left-[-0.1em] top-[0.15em] inline-flex h-[1em] w-[1em] items-center justify-center rounded-full bg-white text-[0.9em] font-bold text-black">✕</span>
+        {{ .text }} <strong>{{ .highlight }}</strong>{{ if .suffix }} {{ .suffix }}{{ end }}
+      </li>
+      {{ end }}
+    </ul>
+
+    <div class="mt-[6em] text-center max-[576px]:mt-[4em]">
+      <p class="mb-8 text-[1.65em] font-light text-white max-[576px]:text-[1.45em]"><strong>{{ .subheading }}</strong></p>
+
+      <a href="{{ .ctaLink }}" class="site-cta inline-flex items-center gap-2 rounded-md bg-[linear-gradient(128deg,#f54e7c_0%,#d04168_50%)] px-7 py-4 text-xl leading-6 font-bold whitespace-nowrap text-white shadow-[1px_3px_5px_rgba(0,0,0,0.25)] transition-colors duration-200 hover:bg-[#c9284c]">{{ .ctaText }}</a>
+    </div>
+  </div>
+</section>
+{{ end }}

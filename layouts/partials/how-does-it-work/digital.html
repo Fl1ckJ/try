@@ -1,0 +1,14 @@
+{{ $section := .Params.digital }}
+<section class="bg-white">
+  <div class="mx-auto max-w-[1272px] px-5 py-20 md:py-24">
+    <div class="mx-auto max-w-[860px] text-center">
+      <img src="{{ $section.icon | relURL }}" alt="" class="how-it-works-reveal mx-auto mb-8 h-[120px] w-[120px] object-contain md:h-[160px] md:w-[160px]" data-how-it-works-reveal>
+      <h2 class="mb-8 text-[2.2rem] font-bold leading-[1.05] text-[#333132] md:text-[3rem]">{{ $section.title }}</h2>
+      <div class="space-y-6 text-[1.08rem] leading-[1.8] text-[#333132]">
+        {{ range $section.paragraphs }}
+          <p>{{ . | safeHTML }}</p>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+{{ define "main" }}
+{{ $pages := .RegularPages.ByDate.Reverse }}
+{{ $paginator := .Paginate $pages 12 }}
+
+<section class="bg-white">
+    <div class="mx-auto max-w-[1272px] px-5 pb-20 pt-[160px]">
+        <div class="grid gap-10">
+            <h1 class="py-4 text-center text-[3rem font-bold leading-none text-#333132] md:text-[3.5rem]"> {{ .Title }}</h1>
+            {{ if gt $paginator.TotalPages 1 }}
+                <div class="mt-2 flex justify-center">
+                    <nav class="inline-flex overflow-hidden rounded-[5px] border border-[#adb5bd]" aria-label="blog pagination bottom">
+                        {{ with $paginator.Prev }}
+                            <a href="{{ .URL }}" class="px-[15px] py-[5px] text-[#0288d1] no-underline transition-colors hover:text-[#2a274f]">Previous</a>
+                        {{ end }}
+                        {{ range $paginator.Pagers }}
+                            {{ if eq .PageNumber $paginator.PageNumber }}
+                                <span aria-current="page" class="border-l border-[#adb5bd] px-[15px] py-[5px] text-[#333132]"> {{ .PageNumber}} </span>
+                            {{ else }}
+                                <a href="{{ .URL }}" class="border-l border-[#adb5bd] px-[15px] py-[5px] text-[#0288d1] no-underline transition-colors hover:text-[#2a274f]">{{ .PageNumber }}</a>
+                            {{ end }}
+                        {{ end }}
+                        {{ with $paginator.Next }}
+                            <a href="{{ .URL }}" class="border-l border-[adb5bd] px-[15px] py-[5px] text-[#0288d1] no-underline transition-colors first:border-l-0 hover:text-[#2a274f]">Next</a>
+                        {{ end }}
+                        
+                    </nav>
+                </div>
+            {{ end }}
+            <div class="grid gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+                {{ range $post := $paginator.Pages }}
+                    {{ partial "blog/card.html" (dict "page" $post "variant" "grid") }}
+                {{ end }}
+            </div>
+            {{ if gt $paginator.TotalPages 1 }}
+                <div class="mt-2 flex justify-center">
+                    <nav class="inline-flex overflow-hidden rounded-[5px] border border-[#adb5bd]" aria-label="blog pagination bottom">
+                        {{ with $paginator.Prev }}
+                            <a href="{{ .URL }}" class="px-[15px] py-[5px] text-[#0288d1] no-underline transition-colors hover:text-[#2a274f]">Previous</a>
+                        {{ end }}
+                        {{ range $paginator.Pagers }}
+                            {{ if eq .PageNumber $paginator.PageNumber }}
+                                <span aria-current="page" class="border-l border-[#adb5bd] px-[15px] py-[5px] text-[#333132]"> {{ .PageNumber}} </span>
+                            {{ else }}
+                                <a href="{{ .URL }}" class="border-l border-[#adb5bd] px-[15px] py-[5px] text-[#0288d1] no-underline transition-colors hover:text-[#2a274f]">{{ .PageNumber }}</a>
+                            {{ end }}
+                        {{ end }}
+                        {{ with $paginator.Next }}
+                            <a href="{{ .URL }}" class="border-l border-[adb5bd] px-[15px] py-[5px] text-[#0288d1] no-underline transition-colors first:border-l-0 hover:text-[#2a274f]">Next</a>
+                        {{ end }}
+                    </nav>
+                </div>
+            {{ end }}
+        </div>
+
+
+    </div>
+</section>
+
+{{ end }}

@@ -1,0 +1,47 @@
+{{ $demoURL := partial "demo/url.html" . }}
+{{ with .Params.benefits }}
+<section class="bg-[linear-gradient(128deg,#eff9ff_35%,#d2dee6_95%)] px-8 py-[6em] max-[576px]:py-[4em]">
+  <div class="mx-auto max-w-[1272px]">
+    <h2 class="mb-20 text-center text-[1.65em] font-light text-[#5e5e5e] max-[576px]:mb-12 max-[576px]:text-[1.45em]">
+      {{ .heading }} <strong>{{ .heading_highlight }}</strong>
+    </h2>
+    <div class="flex flex-col gap-16">
+      <div class="grid items-center gap-16 lg:grid-cols-[35%_55%] lg:gap-16">
+        <div class="mx-auto flex max-w-[500px] flex-col gap-6 lg:mx-0">
+          {{ range .firstColumn }}
+          <div class="relative pl-8 text-left text-[1.25em] font-light leading-[1.75] text-[#5e5e5e]">
+            <span class="absolute left-0 top-[1px] inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#2287c8] text-[1.1rem] font-bold text-white">{{ .number }}</span>
+            {{ .text }} <strong class="font-bold text-[#5e5e5e]">{{ .highlight }}</strong>{{ if .suffix }} {{ .suffix }}{{ end }}
+          </div>
+          {{ end }}
+        </div>
+        <div class="relative h-0 w-full pb-[62%] sm:pb-[56%] lg:pb-[50%]">
+          <img class="reveal-image absolute left-0 top-0 block w-full rounded-lg shadow-[1px_3px_5px_rgba(0,0,0,0.25)]" src="{{ .firstImage }}" alt="steeltrace dashboard">
+          <img class="reveal-image absolute bottom-0 left-[4%] block w-[28%] rounded-lg shadow-[1px_3px_5px_rgba(0,0,0,0.25)] sm:left-[7%] sm:w-[30%]" src="{{ .fifthImage }}" alt="">
+          <img class="reveal-image absolute bottom-[6%] right-[3%] block w-[42%] rounded-lg shadow-[1px_3px_5px_rgba(0,0,0,0.25)] sm:bottom-[10%] sm:right-[5%] sm:w-[50%]" src="{{ .sixthImage }}" alt="">
+        </div>
+      </div>
+
+      <div class="grid items-center gap-16 lg:grid-cols-[55%_35%] lg:gap-16">
+        <div class="relative order-2 h-0 w-full pb-[72%] sm:pb-[68%] lg:order-1 lg:pb-[65%]">
+          <img class="reveal-image absolute left-[10%] top-0 block w-[80%] rounded-lg shadow-[1px_3px_5px_rgba(0,0,0,0.25)]" src="{{ .secondImage }}" alt="steeltrace chart">
+          <img class="reveal-image absolute bottom-0 left-[2%] block w-[22%] rounded-lg shadow-[1px_3px_5px_rgba(0,0,0,0.25)] sm:left-0 sm:w-[25%]" src="{{ .thirdImage }}" alt="3rd image">
+          <img class="reveal-image absolute bottom-[3%] right-[2%] block w-[24%] rounded-lg shadow-[1px_3px_5px_rgba(0,0,0,0.25)] sm:bottom-[5%] sm:right-0 sm:w-[27%]" src="{{ .fourthImage }}" alt="4th image">
+        </div>
+        <div class="order-1 mx-auto flex max-w-[500px] flex-col gap-6 lg:order-2 lg:mx-0">
+          {{ range .secondColumn }}
+          <div class="relative pl-8 text-left text-[1.25em] font-light leading-[1.75] text-[#5e5e5e]">
+            <span class="absolute left-0 top-[1px] inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#2287c8] text-[1.1rem] font-bold text-white">{{ .number }}</span>
+            {{ if .text }}{{ .text }} {{ end }}<strong class="font-bold text-[#5e5e5e]">{{ .highlight }}</strong>{{ if .suffix }} {{ .suffix }}{{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+
+      <div class="mt-[6em] flex justify-center max-[576px]:mt-[4em]">
+        <a href="{{ $demoURL }}" class="site-cta inline-flex items-center gap-2 rounded-md bg-[linear-gradient(128deg,#f54e7c_0%,#d04168_50%)] px-7 py-4 text-xl leading-6 font-bold whitespace-nowrap text-white shadow-[1px_3px_5px_rgba(0,0,0,0.25)] transition-colors duration-200 hover:bg-[#c9284c]">Get a Demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,6 @@
+{{- $demoPage := site.GetPage "section" "demo" -}}
+{{- if $demoPage -}}
+  {{- printf "%s#book-demo" $demoPage.RelPermalink -}}
+{{- else -}}
+  {{- printf "%s#book-demo" ("/demo/" | relURL) -}}
+{{- end -}}

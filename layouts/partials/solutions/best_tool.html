@@ -1,0 +1,19 @@
+{{ with .Params.best_tool }}
+  <div class="contentBlock variableHeight multiCol multiCol_4 background_darkblue">
+    <div class="fader"></div>
+    <div class="content container page">
+      <div>
+        <h2>{{ .heading }}</h2>
+        <div class="multiColRow row">
+          {{ range .items }}
+            <div class="text textAlone col col-12 col-md-6 col-lg-3">
+              <p><img src="{{ .icon }}" alt="{{ .title }}" class="featureIcon"></p>
+              <h3>{{ .title }}</h3>
+              <p>{{ .body }}</p>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

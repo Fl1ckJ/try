@@ -1,0 +1,76 @@
+{{- $siteTitle := .Site.Title -}}
+{{- $title := $siteTitle -}}
+{{- if and .Title (not .IsHome) -}}
+  {{- $title = printf "%s | %s" .Title $siteTitle -}}
+{{- end -}}
+
+{{- $description := partial "head/description.html" . -}}
+{{- $imageURL := partial "head/image-url.html" . -}}
+{{- $appName := default $siteTitle .Site.Params.applicationName -}}
+{{- $themeColor := default "#0288D1" .Site.Params.themeColor -}}
+{{- $faviconVersion := default "1" .Site.Params.faviconVersion -}}
+{{- $robots := "index, follow, max-image-preview:large" -}}
+{{- if or .Params.noindex (in (slice "taxonomy" "term") .Kind) -}}
+  {{- $robots = "noindex, follow, max-image-preview:large" -}}
+{{- end -}}
+{{- with .Params.robots -}}
+  {{- $robots = . -}}
+{{- end -}}
+{{- $ogType := "website" -}}
+{{- if and .IsPage (eq .Section "blog") -}}
+  {{- $ogType = "article" -}}
+{{- end -}}
+{{- $twitterCard := "summary" -}}
+{{- if $imageURL -}}
+  {{- $twitterCard = "summary_large_image" -}}
+{{- end -}}
+
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $description }}">
+<meta name="robots" content="{{ $robots }}">
+<meta name="application-name" content="{{ $appName }}">
+<meta name="apple-mobile-web-app-title" content="{{ $appName }}">
+<meta name="theme-color" content="{{ $themeColor }}">
+<meta name="msapplication-TileColor" content="{{ $themeColor }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="shortcut icon" href="{{ "/favicon.ico" | relURL }}?v={{ $faviconVersion }}">
+<link rel="icon" href="{{ "/favicon-16x16.png" | relURL }}?v={{ $faviconVersion }}" sizes="16x16" type="image/png">
+<link rel="icon" href="{{ "/favicon-32x32.png" | relURL }}?v={{ $faviconVersion }}" sizes="32x32" type="image/png">
+<link rel="icon" href="{{ "/favicon.ico" | relURL }}?v={{ $faviconVersion }}" sizes="any">
+<link rel="apple-touch-icon" href="{{ "/apple-touch-icon.png" | relURL }}?v={{ $faviconVersion }}" sizes="180x180">
+<link rel="manifest" href="{{ "/site.webmanifest" | relURL }}?v={{ $faviconVersion }}">
+
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:locale" content="{{ default "en_US" .Site.Params.locale }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:type" content="{{ $ogType }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ with $imageURL }}
+  <meta property="og:image" content="{{ . }}">
+  <meta property="og:image:alt" content="{{ $.Title }}">
+{{ end }}
+
+<meta name="twitter:card" content="{{ $twitterCard }}">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $description }}">
+{{ with $imageURL }}
+  <meta name="twitter:image" content="{{ . }}">
+  <meta name="twitter:image:alt" content="{{ $.Title }}">
+{{ end }}
+
+{{- if and .IsPage (eq .Section "blog") -}}
+  {{- with .Params.author }}
+    <meta name="author" content="{{ . }}">
+    <meta property="article:author" content="{{ . }}">
+  {{- end }}
+  {{- with .Date }}
+    <meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+  {{- end }}
+  {{- with .Lastmod }}
+    <meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+  {{- end }}
+  <meta property="article:section" content="Blog">
+{{- end }}
+
+{{ partial "head/schema.html" . }}
