@@ -1,4 +1,5 @@
 import { type HcaptchaWidgetId, hideMessage, loadHcaptchaScript, showMessage } from "./hcaptcha"
+import { submitMauticFormAndRedirect } from "./mauticSubmit"
 
 export const initProductBrochureForm = () => {
   const modal = document.getElementById("product-brochure-modal")
@@ -141,6 +142,6 @@ export const initProductBrochureForm = () => {
       }
     }
 
-    form.submit()
+    await submitMauticFormAndRedirect(form)
   })
 }

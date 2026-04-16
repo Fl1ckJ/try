@@ -1,4 +1,5 @@
 import { type HcaptchaWidgetId, hideMessage, loadHcaptchaScript, showMessage } from "./hcaptcha"
+import { submitMauticFormAndRedirect } from "./mauticSubmit"
 
 export const initBlockchainGuideForm = () => {
   const modal = document.getElementById("blockchain-guide-modal")
@@ -134,6 +135,6 @@ export const initBlockchainGuideForm = () => {
       }
     }
 
-    form.submit()
+    await submitMauticFormAndRedirect(form)
   })
 }

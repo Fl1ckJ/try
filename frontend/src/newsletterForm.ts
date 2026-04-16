@@ -1,4 +1,5 @@
 import { type HcaptchaWidgetId, hideMessage, loadHcaptchaScript, showMessage } from "./hcaptcha"
+import { submitMauticFormAndRedirect } from "./mauticSubmit"
 
 export const initNewsletterForm = () => {
   const modal = document.getElementById("newsletter-modal")
@@ -141,6 +142,6 @@ export const initNewsletterForm = () => {
       }
     }
 
-    form.submit()
+    await submitMauticFormAndRedirect(form)
   })
 }

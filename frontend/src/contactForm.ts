@@ -1,4 +1,5 @@
 import { type HcaptchaWidgetId, hideMessage, loadHcaptchaScript, showMessage } from "./hcaptcha"
+import { submitMauticFormAndRedirect } from "./mauticSubmit"
 
 export const initContactForm = () => {
   const form = document.getElementById("mauticform_contact")
@@ -92,6 +93,6 @@ export const initContactForm = () => {
       }
     }
 
-    form.submit()
+    await submitMauticFormAndRedirect(form)
   })
 }

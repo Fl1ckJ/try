@@ -1,4 +1,5 @@
 import { type HcaptchaWidgetId, hideMessage, loadHcaptchaScript, showMessage } from "./hcaptcha"
+import { submitMauticFormAndRedirect } from "./mauticSubmit"
 
 type WeeklyDemoPayload = {
   company: string
@@ -419,6 +420,6 @@ export const initWeeklyDemoForm = () => {
       }
     }
 
-    form.submit()
+    await submitMauticFormAndRedirect(form)
   })
 }
