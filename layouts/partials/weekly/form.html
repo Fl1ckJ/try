@@ -100,7 +100,7 @@
         <div id="weekly_demo_message" class="mb-4 hidden rounded-[0.25rem] border border-[#badbcc] bg-[#d1e7dd] px-4 py-4 text-[1rem] leading-[1.5] text-[#0f5132]"></div>
 
         <input type="hidden" name="mauticform[formId]" id="mauticform_weeklyproductdemo_id" value="{{ .form_id }}">
-        <input type="hidden" name="mauticform[return]" id="mauticform_weeklyproductdemo_return" value="">
+        <input type="hidden" name="mauticform[return]" id="mauticform_weeklyproductdemo_return" value="{{ "form/message/" | absURL }}">
         <input type="hidden" name="mauticform[formName]" id="mauticform_weeklyproductdemo_name" value="{{ .form_name }}">
         <input type="hidden" name="mauticform[hcdone]" id="mauticform_weeklyproductdemo_hcdone" value="bleh">
         <input type="hidden" name="mauticform[submit]" id="mauticform_weeklyproductdemo_submit_value" value="1">

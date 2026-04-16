@@ -75,47 +75,23 @@ export const initContactForm = () => {
 
     submitButton.disabled = true
 
-    try {
-      const response = await fetch("/hcaptcha", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-        },
-        body: new URLSearchParams({
-          hCaptchaResponse,
-        }),
-      })
+    const hcdoneField = form.querySelector<HTMLInputElement>('input[name="mauticform[hcdone]"]')
 
-      const responseText = await response.text()
-      const payload = JSON.parse(responseText) as {
-        message?: string
-        success?: boolean
+    if (hcdoneField) {
+      hcdoneField.value = "bleh"
+    } else {
+      const hiddenInput = document.createElement("input")
+      hiddenInput.type = "hidden"
+      hiddenInput.name = "mauticform[hcdone]"
+      hiddenInput.value = "bleh"
+
+      if (hiddenFieldContainer) {
+        hiddenFieldContainer.append(hiddenInput)
+      } else {
+        form.append(hiddenInput)
       }
-
-      window.hcaptcha.reset(widgetId)
-
-      if (payload.success === true) {
-        if (hiddenFieldContainer) {
-          const hiddenInput = document.createElement("input")
-          hiddenInput.type = "hidden"
-          hiddenInput.name = "mauticform[hcdone]"
-          hiddenInput.value = "bleh"
-          hiddenFieldContainer.append(hiddenInput)
-        }
-
-        form.submit()
-        return
-      }
-
-      showMessage(captchaError, payload.message ?? "Error processing hCaptcha. Please try again.")
-    } catch {
-      showMessage(captchaError, "Error checking hCaptcha. Please try again.")
-
-      if (window.hcaptcha && widgetId !== undefined) {
-        window.hcaptcha.reset(widgetId)
-      }
-    } finally {
-      submitButton.disabled = false
     }
+
+    form.submit()
   })
 }

@@ -1,0 +1,37 @@
+{{ define "main" }}
+  {{ $message := .Params.message }}
+  {{ $primaryURL := default "/" $message.primary_url }}
+  {{ $secondaryURL := default "/demo/#book-demo" $message.secondary_url }}
+
+  <section class="relative overflow-hidden bg-[linear-gradient(135deg,#f7fbff_0%,#ffffff_42%,#edf7ff_100%)] px-5 pb-20 pt-[170px] text-[#333132] md:pb-28 md:pt-[190px]">
+    <div class="pointer-events-none absolute left-[-120px] top-[120px] h-[260px] w-[260px] rounded-full bg-[#d9eefb] opacity-70 blur-3xl"></div>
+    <div class="pointer-events-none absolute bottom-[-140px] right-[-90px] h-[320px] w-[320px] rounded-full bg-[#fbd7e2] opacity-60 blur-3xl"></div>
+
+    <div class="relative mx-auto max-w-[760px] rounded-[1.1rem] border border-[#d8e8f3] bg-white/90 px-6 py-12 text-center shadow-[0_20px_70px_rgba(1,70,108,0.14)] backdrop-blur md:px-14 md:py-16">
+      <div class="mx-auto mb-7 flex h-[74px] w-[74px] items-center justify-center rounded-full bg-[linear-gradient(128deg,#0288D1_0%,#01466c_100%)] text-white shadow-[0_14px_35px_rgba(2,136,209,0.28)]">
+        <svg class="h-9 w-9" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12.5L9.4 16.5L19 7.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+        </svg>
+      </div>
+
+      {{ with $message.eyebrow }}
+        <p class="mb-3 text-[0.82rem] font-bold tracking-[0.18em] text-[#0288D1] uppercase">{{ . }}</p>
+      {{ end }}
+
+      <h1 class="mb-5 text-[2.65rem] font-bold leading-[1.05] text-[#333132] md:text-[3.5rem]">{{ .Title }}</h1>
+
+      <p class="mx-auto mb-9 max-w-[560px] text-[1.12rem] font-light leading-[1.7] text-[#5e5e5e] md:text-[1.22rem]">
+        {{ default .Description $message.text }}
+      </p>
+
+      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a href="{{ $primaryURL | relURL }}" class="inline-flex min-w-[170px] items-center justify-center rounded-md bg-[linear-gradient(128deg,#f54e7c_0%,#d04168_50%)] px-7 py-4 text-[1rem] font-bold leading-6 text-white shadow-[1px_3px_5px_rgba(0,0,0,0.25)] transition-transform hover:-translate-y-0.5">
+          {{ default "Back to home" $message.primary_label }}
+        </a>
+        <a href="{{ $secondaryURL | relURL }}" class="inline-flex min-w-[170px] items-center justify-center rounded-md border border-[#b7c7d3] bg-white px-7 py-4 text-[1rem] font-bold leading-6 text-[#01466c] shadow-[1px_3px_5px_rgba(0,0,0,0.08)] transition-colors hover:border-[#0288D1] hover:text-[#0288D1]">
+          {{ default "Book a demo" $message.secondary_label }}
+        </a>
+      </div>
+    </div>
+  </section>
+{{ end }}

@@ -41,7 +41,7 @@
         </div>
 
         <input type="hidden" name="mauticform[formId]" id="mauticform_newsletter_id" value="{{ $form.form_id }}">
-        <input type="hidden" name="mauticform[return]" id="mauticform_newsletter_return" value="">
+        <input type="hidden" name="mauticform[return]" id="mauticform_newsletter_return" value="{{ "form/message/" | absURL }}">
         <input type="hidden" name="mauticform[formName]" id="mauticform_newsletter_name" value="{{ $form.form_name }}">
         <input type="hidden" name="mauticform[submit]" id="mauticform_newsletter_submit_value" value="1">
         <div id="mauticform_newsletter_tralala"></div>
