@@ -93,6 +93,12 @@ export const initContactForm = () => {
       }
     }
 
-    await submitMauticFormAndRedirect(form)
+    try {
+      await submitMauticFormAndRedirect(form, hCaptchaResponse)
+    } catch (error) {
+      showMessage(captchaError, error instanceof Error ? error.message : "Error submitting form. Please try again.")
+      submitButton.disabled = false
+      window.hcaptcha.reset(widgetId)
+    }
   })
 }

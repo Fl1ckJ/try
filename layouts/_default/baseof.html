@@ -12,7 +12,8 @@
 {{- if not (hasSuffix $siteBasePath "/") -}}
   {{- $siteBasePath = printf "%s/" $siteBasePath -}}
 {{- end -}}
-<body data-site-base="{{ $siteBasePath }}" class="flex min-h-screen flex-col bg-white font-sans text-[#5e5e5e] antialiased">
+{{- $mauticBackendSubmitUrl := default "https://mautic-backend.onrender.com/submit" .Site.Params.mautic_backend_submit_url -}}
+<body data-site-base="{{ $siteBasePath }}" data-mautic-backend-submit-url="{{ $mauticBackendSubmitUrl }}" class="flex min-h-screen flex-col bg-white font-sans text-[#5e5e5e] antialiased">
   {{ partial "header.html" . }}
   <main class="flex-1">
     {{ block "main" . }}{{ end }}

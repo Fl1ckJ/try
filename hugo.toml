@@ -12,6 +12,7 @@ locale = "en_US"
 applicationName = "steeltrace.co"
 themeColor = "#0288D1"
 faviconVersion = "20260407"
+mautic_backend_submit_url = "https://mautic-backend.onrender.com/submit"
 
 [markup]
   [markup.goldmark]

@@ -1,9 +1,17 @@
 import { toSitePath } from "./siteBase"
 
+type BackendResponse = {
+  message?: string
+  redirect?: string
+  success?: boolean
+}
+
 const redirectPath = "form/message/"
-const fallbackRedirectDelay = 1200
+const fallbackBackendSubmitUrl = "https://mautic-backend.onrender.com/submit"
 
 const getRedirectUrl = () => new URL(toSitePath(redirectPath), window.location.origin).toString()
+
+const getBackendSubmitUrl = () => document.body.dataset.mauticBackendSubmitUrl || fallbackBackendSubmitUrl
 
 const setReturnUrl = (form: HTMLFormElement, redirectUrl: string) => {
   const returnField = form.querySelector<HTMLInputElement>('input[name="mauticform[return]"]')
@@ -12,47 +20,44 @@ const setReturnUrl = (form: HTMLFormElement, redirectUrl: string) => {
   }
 }
 
-const submitWithHiddenFrame = (form: HTMLFormElement, redirectUrl: string) => {
-  const frameName = `mautic-submit-${form.id || "form"}`
-  let frame = document.querySelector<HTMLIFrameElement>(`iframe[name="${frameName}"]`)
-
-  if (!frame) {
-    frame = document.createElement("iframe")
-    frame.name = frameName
-    frame.title = "Form submission"
-    frame.tabIndex = -1
-    frame.setAttribute("aria-hidden", "true")
-    frame.className = "hidden"
-    document.body.append(frame)
+const setFormValue = (form: HTMLFormElement, name: string, value: string) => {
+  const field = form.querySelector<HTMLInputElement>(`input[name="${name}"]`)
+  if (field) {
+    field.value = value
+    return
   }
 
-  let redirected = false
-  const redirect = () => {
-    if (redirected) return
-    redirected = true
-    window.location.assign(redirectUrl)
-  }
-
-  frame.addEventListener("load", redirect, { once: true })
-  form.target = frameName
-  form.submit()
-  window.setTimeout(redirect, fallbackRedirectDelay)
+  const hiddenInput = document.createElement("input")
+  hiddenInput.type = "hidden"
+  hiddenInput.name = name
+  hiddenInput.value = value
+  form.append(hiddenInput)
 }
 
-export const submitMauticFormAndRedirect = async (form: HTMLFormElement) => {
+const parseBackendResponse = async (response: Response): Promise<BackendResponse> => {
+  try {
+    return await response.json() as BackendResponse
+  } catch {
+    return {}
+  }
+}
+
+export const submitMauticFormAndRedirect = async (form: HTMLFormElement, hCaptchaResponse: string) => {
   const redirectUrl = getRedirectUrl()
   setReturnUrl(form, redirectUrl)
+  setFormValue(form, "h-captcha-response", hCaptchaResponse)
+  setFormValue(form, "mauticform[hcdone]", "bleh")
 
-  try {
-    await fetch(form.action, {
-      body: new FormData(form),
-      credentials: "include",
-      method: form.method || "POST",
-      mode: "no-cors",
-    })
+  const response = await fetch(getBackendSubmitUrl(), {
+    body: new FormData(form),
+    method: "POST",
+  })
 
-    window.location.assign(redirectUrl)
-  } catch {
-    submitWithHiddenFrame(form, redirectUrl)
+  const payload = await parseBackendResponse(response)
+
+  if (!response.ok || payload.success !== true) {
+    throw new Error(payload.message || "Form submission failed.")
   }
+
+  window.location.assign(payload.redirect || redirectUrl)
 }

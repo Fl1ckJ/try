@@ -386,6 +386,7 @@ export const initWeeklyDemoForm = () => {
     if (!valid) return
 
     submitButton.disabled = true
+    let hCaptchaResponse = ""
 
     if (captchaTarget instanceof HTMLDivElement) {
       const captchaReady = await renderOptionalCaptcha()
@@ -395,7 +396,7 @@ export const initWeeklyDemoForm = () => {
         return
       }
 
-      const hCaptchaResponse = window.hcaptcha.getResponse(widgetId)
+      hCaptchaResponse = window.hcaptcha.getResponse(widgetId)
       if (!hCaptchaResponse) {
         showMessage(captchaError, "Please complete the captcha.")
         submitButton.disabled = false
@@ -420,6 +421,14 @@ export const initWeeklyDemoForm = () => {
       }
     }
 
-    await submitMauticFormAndRedirect(form)
+    try {
+      await submitMauticFormAndRedirect(form, hCaptchaResponse)
+    } catch (error) {
+      showMessage(captchaError, error instanceof Error ? error.message : "Error submitting form. Please try again.")
+      submitButton.disabled = false
+      if (window.hcaptcha && widgetId !== undefined) {
+        window.hcaptcha.reset(widgetId)
+      }
+    }
   })
 }
