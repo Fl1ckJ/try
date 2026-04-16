@@ -1,4 +1,4 @@
-import { type HcaptchaWidgetId, hideMessage, loadHcaptchaScript, showMessage } from "./hcaptcha"
+import { hideMessage, showMessage } from "./hcaptcha"
 
 type WeeklyDemoPayload = {
   company: string
@@ -9,11 +9,6 @@ type WeeklyDemoPayload = {
   first_name: string
   last_name: string
   notes: string
-}
-
-type HcaptchaResponse = {
-  message?: string
-  success?: boolean
 }
 
 const inputErrorClass = "border-[#dc3545]"
@@ -172,11 +167,9 @@ const buildUpcomingThursdaySlots = (slotCount: number, evenWeekTime: string, odd
 
 export const initWeeklyDemoForm = () => {
   const form = document.getElementById("weekly-demo-form")
-  const captchaTarget = document.getElementById("weekly_demo_hcaptcha")
   const submitButton = document.getElementById("weekly_demo_submit")
   const successMessage = document.getElementById("weekly_demo_message")
   const formError = document.getElementById("weekly_demo_error")
-  const captchaError = document.getElementById("weekly_demo_hcaptcha_error")
   const nextUpTarget = document.getElementById("weekly_demo_next_up_value")
   const hiddenFieldContainer = document.getElementById("weekly_demo_tralala")
 
@@ -186,12 +179,9 @@ export const initWeeklyDemoForm = () => {
 
   form.dataset.weeklyDemoInitialized = "true"
 
-  const hasCaptcha = captchaTarget instanceof HTMLDivElement
-  const sitekey = hasCaptcha ? captchaTarget.dataset.sitekey : undefined
   const evenWeekTime = form.dataset.weeklyEvenWeekTime?.trim() || defaultEvenWeekTime
   const oddWeekTime = form.dataset.weeklyOddWeekTime?.trim() || defaultOddWeekTime
   const slotCount = Number.parseInt(form.dataset.weeklySlotCount ?? "", 10) || defaultSlotCount
-  let widgetId: HcaptchaWidgetId | undefined
 
   const fields = {
     first_name: {
@@ -279,32 +269,6 @@ export const initWeeklyDemoForm = () => {
     fieldNames.forEach(clearFieldError)
     hideMessage(formError)
     hideMessage(successMessage)
-    hideMessage(captchaError)
-  }
-
-  const renderCaptcha = async () => {
-    if (!hasCaptcha) return true
-    if (widgetId !== undefined) return true
-
-    if (!sitekey) {
-      showMessage(captchaError, "Captcha configuration is missing.")
-      return false
-    }
-
-    try {
-      await loadHcaptchaScript()
-    } catch {
-      showMessage(captchaError, "Captcha failed to load. Please refresh and try again.")
-      return false
-    }
-
-    if (!window.hcaptcha) {
-      showMessage(captchaError, "Captcha failed to load. Please refresh and try again.")
-      return false
-    }
-
-    widgetId = window.hcaptcha.render(captchaTarget, { sitekey })
-    return true
   }
 
   const readTextValue = (value: typeof fields[keyof typeof fields]["input"]) => {
@@ -377,11 +341,8 @@ export const initWeeklyDemoForm = () => {
   })
 
   populateDateOptions()
-  if (hasCaptcha) {
-    void renderCaptcha()
-  }
 
-  form.addEventListener("submit", async (event) => {
+  form.addEventListener("submit", (event) => {
     event.preventDefault()
     clearAllFieldErrors()
     if (hiddenFieldContainer) {
@@ -395,58 +356,23 @@ export const initWeeklyDemoForm = () => {
 
     submitButton.disabled = true
 
-    try {
-      if (hasCaptcha) {
-        const captchaReady = await renderCaptcha()
-        if (!captchaReady || !window.hcaptcha || widgetId === undefined) {
-          showMessage(captchaError, "Captcha is still loading. Please try again.")
-          return
-        }
+    const hcdoneField = form.querySelector<HTMLInputElement>('input[name="mauticform[hcdone]"]')
 
-        const hCaptchaResponse = window.hcaptcha.getResponse(widgetId)
-        if (!hCaptchaResponse) {
-          showMessage(captchaError, "Please complete the captcha.")
-          return
-        }
-
-        const response = await fetch("/hcaptcha", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-          },
-          body: new URLSearchParams({
-            hCaptchaResponse,
-          }),
-        })
-
-        const responseText = await response.text()
-        const data = JSON.parse(responseText) as HcaptchaResponse
-
-        window.hcaptcha.reset(widgetId)
-
-        if (!response.ok || data.success !== true) {
-          showMessage(captchaError, data.message ?? "Error processing hCaptcha. Please try again.")
-          return
-        }
-      }
+    if (hcdoneField) {
+      hcdoneField.value = "bleh"
+    } else {
+      const hiddenInput = document.createElement("input")
+      hiddenInput.type = "hidden"
+      hiddenInput.name = "mauticform[hcdone]"
+      hiddenInput.value = "bleh"
 
       if (hiddenFieldContainer) {
-        const hiddenInput = document.createElement("input")
-        hiddenInput.type = "hidden"
-        hiddenInput.name = "mauticform[hcdone]"
-        hiddenInput.value = "bleh"
         hiddenFieldContainer.append(hiddenInput)
+      } else {
+        form.append(hiddenInput)
       }
-
-      form.submit()
-    } catch {
-      if (window.hcaptcha && widgetId !== undefined) {
-        window.hcaptcha.reset(widgetId)
-      }
-
-      showMessage(captchaError, "Error checking hCaptcha. Please try again.")
-    } finally {
-      submitButton.disabled = false
     }
+
+    form.submit()
   })
 }

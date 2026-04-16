@@ -87,21 +87,13 @@
           <span data-weekly-error class="hidden text-[0.875rem] leading-[1.5] text-[#dc3545]"></span>
         </div>
 
-        {{ if .captcha_enabled }}
-          <div class="mb-4 grid gap-2">
-            <div class="overflow-x-auto">
-              <div id="weekly_demo_hcaptcha" class="h-captcha min-h-[78px] min-w-[302px]" data-sitekey="{{ .sitekey }}"></div>
-            </div>
-            <span id="weekly_demo_hcaptcha_error" class="hidden text-[0.875rem] leading-[1.5] text-[#dc3545]"></span>
-          </div>
-        {{ end }}
-
         <div id="weekly_demo_error" class="mb-4 hidden rounded-[0.25rem] border border-[#f5c2c7] bg-[#f8d7da] px-4 py-4 text-[1rem] leading-[1.5] text-[#842029]"></div>
         <div id="weekly_demo_message" class="mb-4 hidden rounded-[0.25rem] border border-[#badbcc] bg-[#d1e7dd] px-4 py-4 text-[1rem] leading-[1.5] text-[#0f5132]"></div>
 
         <input type="hidden" name="mauticform[formId]" id="mauticform_weeklyproductdemo_id" value="{{ .form_id }}">
         <input type="hidden" name="mauticform[return]" id="mauticform_weeklyproductdemo_return" value="">
         <input type="hidden" name="mauticform[formName]" id="mauticform_weeklyproductdemo_name" value="{{ .form_name }}">
+        <input type="hidden" name="mauticform[hcdone]" id="mauticform_weeklyproductdemo_hcdone" value="bleh">
         <input type="hidden" name="mauticform[submit]" id="mauticform_weeklyproductdemo_submit_value" value="1">
         <div id="weekly_demo_tralala"></div>
 
