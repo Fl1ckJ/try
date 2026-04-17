@@ -8,7 +8,7 @@
     <ul class="mx-auto mb-0 max-w-[500px] list-none text-left">
       {{ range .items }}
       <li class="relative pb-6 pl-[1.55em] text-[1.25em] font-light leading-[1.75] text-white last:pb-0">
-        <span class="absolute left-[-0.1em] top-[0.15em] inline-flex h-[1em] w-[1em] items-center justify-center rounded-full bg-white text-[0.9em] font-bold text-black">✕</span>
+        <span class="absolute left-[-0.1em] top-[0.15em] inline-block h-[1em] w-[1em] rounded-full bg-white text-[1.1em]" style="background-image: url('{{ "/dist/images/cross-black.svg" | relURL }}'); background-size: 0.65em; background-repeat: no-repeat; background-position: 0.18em 0.18em;" aria-hidden="true"></span>
         {{ .text }} <strong>{{ .highlight }}</strong>{{ if .suffix }} {{ .suffix }}{{ end }}
       </li>
       {{ end }}
