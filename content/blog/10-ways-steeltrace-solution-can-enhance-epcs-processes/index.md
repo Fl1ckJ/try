@@ -10,9 +10,20 @@ read_more:
   heading: "Read more about"
   items:
     -
-      title: "Product Demo"
-      url: "/demo/#book-demo"
-      label: "View page"
+      title: "5 Ways SteelTrace Enhances Quality Management for a Steel Supply Chain"
+      url: "/blog/5-ways-steeltrace-enhances-quality-management-for-a-steel-supply-chain/"
+      summary: "Quality management plays a critical role in the steel supply chain, due to the requirements, standards, specifications and customer expectations. Quality Assurance and Quality Control are two key aspects of it, which despite having some differences, are both focusing on ensuring quality. Currently, quality managers faces several challenges, since the quality management processes are manual, time-consuming, and opaque processes prone to human error and unauthorised data manipulation. However, SteelTrace can resolve these issues."
+      label: "Read article"
+    -
+      title: "6 ways to save cost while increasing quality in the steel supply chain for oil & gas"
+      url: "/blog/6-ways-to-save-cost-while-increasing-quality-in-the-steel-supply-chain-for-oil-gas/"
+      summary: "What if there was a way to improve the quality in the steel supply chain while still reducing costs? A revolutionary technology called blockchain makes this possible."
+      label: "Read article"
+    -
+      title: "Compliance-by-design"
+      url: "/blog/compliance-by-design/"
+      summary: "In the steel industry are many of standards and requirements that material need to comply with throughout every step of the supply chain. This can slow down processes and increase the chance of errors. But then how can we increase the efficiency and reliability of the steel supply chain? In this blog post we’ll discuss our solution."
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"

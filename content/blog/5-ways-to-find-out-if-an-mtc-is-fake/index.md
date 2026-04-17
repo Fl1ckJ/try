@@ -13,7 +13,7 @@ read_more:
     -
       title: "Solutions"
       url: "/solutions/"
-      label: "View page"
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"

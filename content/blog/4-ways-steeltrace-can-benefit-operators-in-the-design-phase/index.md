@@ -10,9 +10,20 @@ read_more:
   heading: "Read more about"
   items:
     -
-      title: "Titanium"
-      url: "/solutions/titanium/"
-      label: "View page"
+      title: "5 Ways SteelTrace Enhances Quality Management for a Steel Supply Chain"
+      url: "/blog/5-ways-steeltrace-enhances-quality-management-for-a-steel-supply-chain/"
+      summary: "Quality management plays a critical role in the steel supply chain, due to the requirements, standards, specifications and customer expectations. Quality Assurance and Quality Control are two key aspects of it, which despite having some differences, are both focusing on ensuring quality. Currently, quality managers faces several challenges, since the quality management processes are manual, time-consuming, and opaque processes prone to human error and unauthorised data manipulation. However, SteelTrace can resolve these issues."
+      label: "Read article"
+    -
+      title: "Connecting the entire supply chain with one specifications checker"
+      url: "/blog/connecting-the-entire-supply-chain-with-one-specifications-checker/"
+      summary: "Imagine a supply chain in which all parties involved are able to save time and costs without being in each other's way. Through blockchain technology and the innovative use of an online platform it is now possible to connect suppliers, labs, notified bodies, inspection agencies, manufacturers, stockists and end customers in just one system."
+      label: "Read article"
+    -
+      title: "9 benefits of SteelTrace for steel manufacturers"
+      url: "/blog/9-benefits-of-steeltrace-for-steel-manufacturers/"
+      summary: "To stay competitive and resilient, steel manufacturers need to continuously adapt their supply chain strategies to address challenges and keep pace with industry developments and technological advancement. In this blog post, we discuss 9 factors about the SteelTrace solution that can benefit manufactures in tackling their current challenges. "
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"

@@ -11,7 +11,7 @@ read_more:
   heading: "Read more about"
   items:
     -
-      title: "efficiency"
+      title: "6 ways to save cost while increasing quality in the steel supply chain for oil & gas"
       url: "/blog/6-ways-to-save-cost-while-increasing-quality-in-the-steel-supply-chain-for-oil-gas/"
       label: "Read article"
     -

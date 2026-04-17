@@ -12,15 +12,15 @@ read_more:
     -
       title: "Solutions"
       url: "/solutions/"
-      label: "View page"
+      label: "Read article"
     -
       title: "How SteelTrace Works"
       url: "/how-does-it-work/"
-      label: "View page"
+      label: "Read article"
     -
       title: "Contact"
       url: "/contact/"
-      label: "View page"
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"

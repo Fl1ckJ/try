@@ -11,7 +11,7 @@ read_more:
   heading: "Read more about"
   items:
     -
-      title: "5 ways to find out if an MTC is fake"
+      title: "5 ways to find out if an MTC (Material Test Certificate) is fake"
       url: "/blog/5-ways-to-find-out-if-an-mtc-is-fake/"
       label: "Read article"
   link:

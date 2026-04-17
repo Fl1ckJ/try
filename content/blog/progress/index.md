@@ -12,7 +12,7 @@ read_more:
     -
       title: "steeltrace.co/weekly"
       url: "/weekly/"
-      label: "View page"
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"

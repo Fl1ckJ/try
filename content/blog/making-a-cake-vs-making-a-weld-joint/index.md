@@ -10,7 +10,7 @@ read_more:
   heading: "Read more about"
   items:
     -
-      title: "5 tips for making welding procedures."
+      title: "5 tips for making welding procedures"
       url: "/blog/5-tips-for-making-welding-procedures/"
       label: "Read article"
   link:

@@ -12,7 +12,7 @@ read_more:
     -
       title: "Join our weekly demo ( No obligations )."
       url: "/weekly/"
-      label: "View page"
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"

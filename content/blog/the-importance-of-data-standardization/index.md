@@ -12,7 +12,7 @@ read_more:
     -
       title: "contact us"
       url: "/contact/"
-      label: "View page"
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"

@@ -10,7 +10,7 @@ read_more:
   heading: "Read more about"
   items:
     -
-      title: "high quality"
+      title: "6 reasons why material testing is crucial"
       url: "/blog/6-reasons-why-material-testing-is-crucial/"
       label: "Read article"
     -

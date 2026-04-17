@@ -10,11 +10,11 @@ read_more:
   heading: "Read more about"
   items:
     -
-      title: "5 Benefits Of A Digital Manufacturing Record Book Mrb"
+      title: "5 benefits of a digital Manufacturing Record Book (MRB)"
       url: "/blog/5-benefits-of-a-digital-manufacturing-record-book-mrb/"
       label: "Read article"
     -
-      title: "5 ways to find out if an MTC is fake”"
+      title: "5 ways to find out if an MTC (Material Test Certificate) is fake"
       url: "/blog/5-ways-to-find-out-if-an-mtc-is-fake/"
       label: "Read article"
   link:

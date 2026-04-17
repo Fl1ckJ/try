@@ -12,11 +12,11 @@ read_more:
     -
       title: "https://steeltrace.co/wp-content/uploads/2022/06/20220614-165239-403.mp4"
       url: "/wp-content/uploads/2022/06/20220614-165239-403.mp4/"
-      label: "View page"
+      label: "Read article"
     -
       title: "https://steeltrace.co/wp-content/uploads/2022/06/20220614-155139-238.mp4"
       url: "/wp-content/uploads/2022/06/20220614-155139-238.mp4/"
-      label: "View page"
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"

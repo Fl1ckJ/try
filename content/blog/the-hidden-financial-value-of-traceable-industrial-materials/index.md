@@ -15,6 +15,9 @@ read_more:
       url: "/blog/5-benefits-of-a-digital-manufacturing-record-book-mrb/"
       summary: "In the steel industry, it is essential to keep track of every aspect of the manufacturing process to ensure high-quality products and meet the required industry standards. This is where the manufacturing record book comes into play."
       label: "Read article"
+      link:
+  label: "View full blog"
+  url: "/blog/"
 ---
 
 Energy infrastructure assets such as pipelines, LNG facilities, and On- & Offshore installations contain vast quantities of high-grade industrial materials. These assets are designed to operate for decades, and the materials used in their construction often retain significant value even at the end of their operational life. However, in many cases, this value is never fully realized.

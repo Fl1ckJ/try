@@ -12,7 +12,7 @@ read_more:
     -
       title: "Product Demo"
       url: "/demo/#book-demo"
-      label: "View page"
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"

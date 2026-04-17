@@ -12,7 +12,7 @@ read_more:
     -
       title: "Find out more"
       url: "/solutions/chromium/"
-      label: "View page"
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"

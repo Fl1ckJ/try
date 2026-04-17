@@ -12,7 +12,7 @@ read_more:
     -
       title: "Weekly"
       url: "/weekly/"
-      label: "View page"
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"

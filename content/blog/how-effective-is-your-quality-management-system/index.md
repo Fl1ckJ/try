@@ -10,10 +10,10 @@ read_more:
   heading: "Read more about"
   items:
     - page: "/solutions/"
-      label: "View page"
+      label: "Read article"
     - page: "/how-does-it-work/"
       title: "How SteelTrace Works"
-      label: "View page"
+      label: "Read article"
   link:
     label: "View full blog"
     url: "/blog/"
