@@ -86,7 +86,7 @@
           <div class="fader"></div>
           <div class="content container page">
             <div>
-              <h2>{{ default "Key Features" .eyebrow }}</h2>
+              <h2 class="!text-white">{{ default "Key Features" .eyebrow }}</h2>
               {{ range $index, $item := .items }}
                 <div class="imageTextColRow row{{ if eq (mod $index 2) 0 }} alt{{ end }}">
                   <div class="image col px-5{{ if eq (mod $index 2) 0 }} lg:pr-0 lg:pl-4{{ else }} lg:pr-4 lg:pl-0{{ end }} col-lg-6 sidebar">
@@ -186,8 +186,8 @@
                   <div class="col col-md-6 col-lg-4">
                     <a class="steelTraceBlogOverviewColumn" href="{{ $url }}">
                       {{ with $imageURL }}
-                        <div class="mb-3">
-                          <img src="{{ . }}" alt="{{ $title }}" class="img-fluid">
+                        <div class="blogOverviewImage">
+                          <img src="{{ . }}" alt="{{ $title }}">
                         </div>
                       {{ end }}
                       <h2>{{ $title }}</h2>
@@ -243,18 +243,20 @@
               <div class="container">
                 <div class="row">
                   <div class="col px-5 md:px-0 col-lg-8 mx-auto">
-                    <div class="text">
-                      <p><img src="{{ "/dist/images/solutions-detail/teams-logo-300px.png" | relURL }}" alt="{{ .heading }}" class="solution-reveal solution-teams-badge"></p>
-                      {{ with .note }}
-                        <h3>{{ . }}</h3>
-                      {{ end }}
-                      {{ with .prompt }}
-                        <h3>{{ . }}</h3>
-                      {{ end }}
-                      <h2>{{ .heading }}</h2>
-                    </div>
-                    <div class="buttons">
-                      <a href="{{ .url }}" class="button">{{ .label }}</a>
+                    <div class="solutionInlineCta">
+                      <div class="text">
+                        <p><img src="{{ "/dist/images/solutions-detail/teams-logo-300px.png" | relURL }}" alt="{{ .heading }}" class="solution-reveal solution-teams-badge"></p>
+                        {{ with .note }}
+                          <h3>{{ . }}</h3>
+                        {{ end }}
+                        {{ with .prompt }}
+                          <h3>{{ . }}</h3>
+                        {{ end }}
+                        <h2>{{ .heading }}</h2>
+                      </div>
+                      <div class="buttons">
+                        <a href="{{ .url }}" class="button">{{ .label }}</a>
+                      </div>
                     </div>
                   </div>
                 </div>

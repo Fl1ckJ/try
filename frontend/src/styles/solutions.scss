@@ -1051,6 +1051,7 @@
   }
 
   .testimonialsWrapper .testimonial .logo img {
+    display: inline-block;
     width: auto;
     height: 70px;
   }
@@ -1149,13 +1150,19 @@
     text-align: left;
   }
 
-  a.steelTraceBlogOverviewColumn .mb-3 {
-    margin: 0 -1.25rem;
-  }
-
-  a.steelTraceBlogOverviewColumn img {
+  a.steelTraceBlogOverviewColumn .blogOverviewImage {
+    aspect-ratio: 1 / 1;
+    margin: 0 -1.25rem 0.75rem;
+    overflow: hidden;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
+    background: #eef3f7;
+  }
+
+  a.steelTraceBlogOverviewColumn .blogOverviewImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   a.steelTraceBlogOverviewColumn p {
@@ -1243,6 +1250,45 @@
   }
 
   .solution-detail-live {
+    .solutionInlineCta {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .solutionInlineCta .text {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      text-align: left;
+    }
+
+    .solutionInlineCta .text h2,
+    .solutionInlineCta .text h3 {
+      width: 100%;
+      max-width: none;
+      margin-right: 0;
+      margin-left: 0;
+      text-align: left;
+    }
+
+    .solutionInlineCta .text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .solutionInlineCta .text img.solution-teams-badge {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .solutionInlineCta .buttons {
+      padding: 1rem 0 0;
+      text-align: left;
+    }
+
+    .solutionInlineCta .button {
+      white-space: nowrap;
+    }
+
     .signUpBanner .content .signUpBannerImageContainer {
       display: block;
       text-align: center;
@@ -1256,8 +1302,8 @@
       text-align: left;
     }
 
-    .content .buttons.buttonsLeft {
-      padding: 1rem 0;
+    .solutionInlineCta .buttons.buttonsLeft {
+      padding: 1rem 0 0;
     }
   }
 }
