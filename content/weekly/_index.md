@@ -34,7 +34,6 @@ weekly_demo:
         - city: "Shanghai, China"
           time: "15:00"
   form:
-    action: "https://mautic.steeltrace.io/form/submit?formId=12"
     form_id: "12"
     form_name: "weeklyproductdemo"
     captcha_enabled: true

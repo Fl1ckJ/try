@@ -1,6 +1,5 @@
 product_brochure:
   title: "Get our Product Brochure"
-  action: "https://mautic.steeltrace.io/form/submit?formId=10"
   form_id: 10
   form_name: "downloadtheproductbrochure"
   sitekey: "54dbef36-8433-4901-9338-6a57133127c4"
@@ -11,7 +10,6 @@ product_brochure:
   submit_label: "Email Me the Brochure!"
 newsletter:
   title: "Receive the latest blogs in your email inbox"
-  action: "https://mautic.steeltrace.io/form/submit?formId=13"
   form_id: 13
   form_name: "newsletter"
   sitekey: "54dbef36-8433-4901-9338-6a57133127c4"

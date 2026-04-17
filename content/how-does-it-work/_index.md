@@ -104,7 +104,6 @@ guide:
   modal:
     title: "Get our Blockchain Guide"
     close_label: "Close"
-    action: "https://mautic.steeltrace.io/form/submit?formId=15"
     form_id: "15"
     form_name: "downloadtheblockchainguide"
     email_label: "Email"
