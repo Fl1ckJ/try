@@ -9,6 +9,6 @@ message:
   text: "Your form has been submitted successfully. We will review it and get back to you soon."
   primary_label: "Back to home"
   primary_url: "/"
-  secondary_label: "Book a demo"
+  secondary_label: "Get a Demo"
   secondary_url: "/demo/#book-demo"
 ---
