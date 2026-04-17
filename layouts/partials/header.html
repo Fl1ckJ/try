@@ -1,4 +1,4 @@
-{{ $lightHeader := or (eq .Section "about") (eq .Section "privacy") (eq .Type "privacy") (eq .RelPermalink "/privacy/") (eq .Section "disclaimer") (eq .Type "disclaimer") (eq .RelPermalink "/disclaimer/") (eq .Section "contact") (eq .Type "contact") (eq .RelPermalink "/contact/") (eq .Section "demo") (eq .Type "demo") (eq .RelPermalink "/demo/") (eq .Section "weekly") (eq .Type "weekly") (eq .RelPermalink "/weekly/") (and (eq .Section "blog") (not .IsPage)) }}
+{{ $lightHeader := or (eq .Section "about") (eq .Section "privacy") (eq .Type "privacy") (eq .RelPermalink "/privacy/") (eq .Section "disclaimer") (eq .Type "disclaimer") (eq .RelPermalink "/disclaimer/") (eq .Section "contact") (eq .Type "contact") (eq .RelPermalink "/contact/") (eq .Section "demo") (eq .Type "demo") (eq .RelPermalink "/demo/") (eq .Section "weekly") (eq .Type "weekly") (eq .RelPermalink "/weekly/") (eq .Section "form") (eq .Type "form") (eq .RelPermalink "/form/message/") (and (eq .Section "blog") (not .IsPage)) }}
 {{ $nav := site.Data.navigation.header }}
 {{ $demoURL := partial "demo/url.html" . }}
 <header class="absolute top-10 z-[200] w-full bg-transparent">
