@@ -9,7 +9,7 @@
 {{ with $post }}
   {{ $title = .Title }}
   {{ $summary = .Params.excerpt }}
-  {{ $image = default .Params.image .Params.preview_image }}
+  {{ $image = or .Params.preview_image .Params.image }}
   {{ $url = .RelPermalink }}
   {{ $imageURL = partial "blog/image-url.html" (dict "page" . "image" $image) }}
 {{ end }}

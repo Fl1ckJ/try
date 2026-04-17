@@ -85,7 +85,7 @@
 
                 {{ with $linkedPage }}
                   {{ if eq .Section "blog" }}
-                    {{ $imageURL = partial "blog/image-url.html" (dict "page" . "image" (default .Params.image .Params.preview_image)) }}
+                    {{ $imageURL = partial "blog/image-url.html" (dict "page" . "image" (or .Params.preview_image .Params.image)) }}
                   {{ end }}
                 {{ end }}
 

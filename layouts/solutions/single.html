@@ -174,7 +174,7 @@
                   {{ $url = .RelPermalink }}
                   {{ $title = .Title }}
                   {{ $summary = .Params.excerpt }}
-                  {{ with .Params.image }}
+                  {{ with (or .Params.preview_image .Params.image) }}
                     {{ $imageURL = partial "blog/image-url.html" (dict "page" $resource "image" .) }}
                   {{ else }}
                     {{ with .Resources.GetMatch "hero*" }}
