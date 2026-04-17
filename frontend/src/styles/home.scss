@@ -1,4 +1,6 @@
 $site-cta-arrow: "../images/arrow-right-2024.svg";
+$home-alt-check-icon: "../images/check.svg";
+$home-alt-cross-icon: "../images/cross-black.svg";
 
 html,
 body {
@@ -51,6 +53,48 @@ strong {
     opacity: 1;
     transform: scale(1);
     animation: imageZoomIn 1s;
+  }
+}
+
+.homeAltSection {
+  .iconText {
+    position: relative;
+    padding-left: 1.55em;
+
+    &::before {
+      position: absolute;
+      display: inline-block;
+      line-height: 1;
+      font-weight: 400;
+      font-style: normal;
+      speak: never;
+      text-decoration: inherit;
+      text-transform: none;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      left: -0.1em;
+      color: #2287c8;
+      margin-right: 0.55rem;
+      top: 0.15em;
+      font-size: 1.1em;
+      border-radius: 50%;
+      background-color: #2287c8;
+      background-image: url($home-alt-check-icon);
+      background-size: 0.65em;
+      background-repeat: no-repeat;
+      background-position: 0.18em 0.18em;
+      width: 1em;
+      height: 1em;
+      content: " ";
+      transition: background-position 0.25s;
+    }
+
+    &.iconCross::before {
+      background-color: #fff;
+      background-position: 0.18em 0.18em;
+      background-image: url($home-alt-cross-icon);
+    }
   }
 }
 
