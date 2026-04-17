@@ -47,11 +47,11 @@ benefits:
       text: "Each supplier would supply data in the"
       highlight: "same format"
       suffix: ""
-  secondColumn:
     - number: 4
       text: "Data is stored in a way it"
       highlight: "never gets lost"
       suffix: ""
+  secondColumn:
     - number: 5
       text: "Your specifications would be"
       highlight: "digital"
